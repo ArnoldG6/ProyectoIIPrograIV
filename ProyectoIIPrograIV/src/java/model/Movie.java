@@ -5,19 +5,19 @@ package model;
  * @author victo
  */
 public class Movie {
-    
+
     private String name;
     private String description;
     private String publicationYear;
-    
-    Movie(String _name, String _desc, String _publicY){
-        this.name=_name;
-        this.description=_desc;
-        this.publicationYear=_publicY;
+
+    Movie(String _name, String _desc, String _publicY) {
+        this.name = _name;
+        this.description = _desc;
+        this.publicationYear = _publicY;
     }
-    
-    Movie(){
-     this("","","");   
+
+    Movie() {
+        this("", "", "");
     }
 
     public String getName() {
@@ -43,5 +43,5 @@ public class Movie {
     public void setPublicationYear(String publicationYear) {
         this.publicationYear = publicationYear;
     }
-    
+
 }

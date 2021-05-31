@@ -12,7 +12,7 @@ import java.util.HashMap;
  * @author victo
  */
 public class Room {
-    
+
     private String name;
     private HashMap<String, Integer> ticketOffice;
     private final static String SUB_STATUS = "OFERTA";
@@ -20,7 +20,5 @@ public class Room {
     public Room() {
         ticketOffice = new HashMap<>();
     }
-    
-    
-    
+
 }

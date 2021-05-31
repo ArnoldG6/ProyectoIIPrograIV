@@ -2,7 +2,6 @@ package model;
 
 import java.security.SecureRandom;
 
-
 public class User implements java.io.Serializable {
 
     String username;
@@ -75,8 +74,9 @@ public class User implements java.io.Serializable {
         final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         SecureRandom random = new SecureRandom();
         String pass1 = "";
-        for (int i = 0; i < len; i++) 
+        for (int i = 0; i < len; i++) {
             pass1 += chars.charAt(random.nextInt(chars.length()));
+        }
         return pass1;
 
     }

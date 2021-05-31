@@ -10,7 +10,7 @@ package model;
  * @author victo
  */
 public class Client extends User {
-    
+
     private int cardNumber;
 
     public Client(String username, String id, String email, String telNum, String pass) {
@@ -22,8 +22,9 @@ public class Client extends User {
         this.pass = pass;
         this.type = 3;
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("Username:").append(username).append(".\n");
         s.append("ID:").append(id).append(".\n");
@@ -32,6 +33,7 @@ public class Client extends User {
         s.append("Type:").append(String.valueOf(type)).append(".\n");
         return s.toString();
     }
+
     public Client() {
         this("", "", "", "", "");
     }

@@ -19,8 +19,9 @@ public class Administrator extends User {
         this.pass = pass;
         this.type = 3;
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("Username:").append(username).append(".\n");
         s.append("ID:").append(id).append(".\n");
@@ -29,10 +30,9 @@ public class Administrator extends User {
         s.append("Type:").append(String.valueOf(type)).append(".\n");
         return s.toString();
     }
+
     public Administrator() {
         this("", "", "", "", "");
     }
-
-    
 
 }
