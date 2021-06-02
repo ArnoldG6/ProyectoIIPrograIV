@@ -23,6 +23,10 @@ public class Cinema {
         admins = new HashMap<>();
         client = new HashMap<>();
     }
+    
+    
+    
+    
 
     public HashMap<String, Movie> getMovies() {
         return movies;
