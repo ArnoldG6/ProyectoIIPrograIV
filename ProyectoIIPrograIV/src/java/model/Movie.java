@@ -9,15 +9,17 @@ public class Movie {
     private String name;
     private String description;
     private String publicationYear;
+    private String director;
 
-    Movie(String _name, String _desc, String _publicY) {
+    public Movie(String _name, String _desc, String _publicY, String direct) {
         this.name = _name;
         this.description = _desc;
         this.publicationYear = _publicY;
+        this.director = direct;
     }
 
-    Movie() {
-        this("", "", "");
+    public Movie() {
+        this("", "", "", "");
     }
 
     public String getName() {
@@ -42,6 +44,14 @@ public class Movie {
 
     public void setPublicationYear(String publicationYear) {
         this.publicationYear = publicationYear;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
     }
 
 }

@@ -8,20 +8,22 @@ import java.util.HashMap;
  */
 public class Projections {
 
+    private String number;
     private String date;
     private String hour;
     private HashMap<String, Room> rooms;
     private HashMap<String, Room> movies;
 
-    Projections(String dat, String hor) {
+    public Projections(String num, String dat, String hor) {
+        this.number = num;
         this.date = dat;
         this.hour = hor;
         this.rooms = new HashMap<>();
         this.movies = new HashMap<>();
     }
 
-    Projections() {
-        this("", "");
+    public Projections() {
+        this("", "", "");
     }
 
     public String getDate() {
@@ -54,6 +56,14 @@ public class Projections {
 
     public void setMovies(HashMap<String, Room> movies) {
         this.movies = movies;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 
 }

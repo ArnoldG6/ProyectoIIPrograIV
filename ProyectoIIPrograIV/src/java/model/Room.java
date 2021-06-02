@@ -15,10 +15,26 @@ public class Room {
 
     private String name;
     private HashMap<String, Integer> ticketOffice;
-    private final static String SUB_STATUS = "OFERTA";
 
-    public Room() {
-        ticketOffice = new HashMap<>();
+    public Room(String nam) {
+        this.name=nam;
+        this.ticketOffice = new HashMap<>();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public HashMap<String, Integer> getTicketOffice() {
+        return ticketOffice;
+    }
+
+    public void setTicketOffice(HashMap<String, Integer> ticketOffice) {
+        this.ticketOffice = ticketOffice;
     }
 
 }

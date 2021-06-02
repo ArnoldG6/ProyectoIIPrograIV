@@ -8,9 +8,11 @@ import java.util.HashMap;
  */
 public class Tickets {
 
+    private String number;
     private HashMap<String, Projections> tickets;
 
-    Tickets() {
+    public Tickets(String num) {
+        this.number = num;
         this.tickets = new HashMap<>();
     }
 
@@ -20,6 +22,14 @@ public class Tickets {
 
     public void setTickets(HashMap<String, Projections> tickets) {
         this.tickets = tickets;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 
 }
