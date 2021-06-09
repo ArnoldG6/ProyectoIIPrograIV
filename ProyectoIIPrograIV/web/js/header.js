@@ -5,11 +5,13 @@ var menu=`
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="menu">
+      <div class="navbar-brand" id="menu">
         <ul class="navbar-nav ml-auto" id="menuUl">
           <li class="nav-item">
-            <a class="nav-link" href="about.html">Nosotros</a>
-            
+            <a class="nav-link" href="">Contact us</a>           
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">Register</a>
           </li>`;
          
 
@@ -33,7 +35,7 @@ var menu=`
             else{
               menu+=`
                 <li class='nav-item'>
-                    <a class='nav-link' href='#' data-toggle='modal' data-target='#loginDialog'>Iniciar-Sesión</a>
+                    <a class='nav-link' href='#' data-toggle='modal' data-target='#loginDialog'>Login</a>
                 </li>`;           
             }
             menu+=`
