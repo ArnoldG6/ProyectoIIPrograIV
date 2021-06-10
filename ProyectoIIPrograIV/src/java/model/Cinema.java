@@ -13,6 +13,7 @@ public class Cinema {
     private HashMap<String, Projections> projections;
     private HashMap<String, Room> rooms;
     private HashMap<String, Administrator> admins;
+    
     private HashMap<String, Client> client;
 
     public Cinema() {

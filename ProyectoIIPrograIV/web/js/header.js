@@ -2,16 +2,13 @@ var menu=`
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <a class="navbar-brand" href="#"><div>Home </div></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" >
-        <span class="navbar-toggler-icon"></span>
-      </button>
       <div class="navbar-brand" id="menu">
         <ul class="navbar-nav ml-auto" id="menuUl">
           <li class="nav-item">
-            <a class="nav-link" href="">Contact us</a>           
+            <a class="nav-link" href="#">Contact us</a>           
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">Register</a>
+            <a class="nav-link" href="#">Register</a>
           </li>`;
          
 
@@ -35,7 +32,7 @@ var menu=`
             else{
               menu+=`
                 <li class='nav-item'>
-                    <a class='nav-link' href='#' data-toggle='modal' data-target='#loginDialog'>Login</a>
+                    <a class='nav-link' href='' data-toggle='modal' data-target='#loginDialog'>Login</a>
                 </li>`;           
             }
             menu+=`
