@@ -1,7 +1,7 @@
 var menu=`
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="#"><img src="images/header.png" style="width: 150px; height: auto;" alt="Home"></a>
+      <a class="navbar-brand" href="#"><div>Home </div></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" >
         <span class="navbar-toggler-icon"></span>
       </button>
