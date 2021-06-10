@@ -1,6 +1,9 @@
 package model;
 
+import java.io.IOException;
 import java.util.HashMap;
+import model.entities.AdministratorDAO;
+import model.entities.ClientDAO;
 
 /**
  *
@@ -8,12 +11,12 @@ import java.util.HashMap;
  */
 public class Cinema {
 
+    private static Cinema instance;
     private HashMap<String, Movie> movies;
     private HashMap<String, Movie> billdBoards;
     private HashMap<String, Projections> projections;
     private HashMap<String, Room> rooms;
     private HashMap<String, Administrator> admins;
-    
     private HashMap<String, Client> client;
 
     public Cinema() {
@@ -24,10 +27,65 @@ public class Cinema {
         admins = new HashMap<>();
         client = new HashMap<>();
     }
-    
-    
-    
-    
+
+    public final void updateModel() throws Exception {
+        Cinema.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
+        Cinema.getInstance().setClient(ClientDAO.getInstance().listAll());
+    }
+
+    public static Cinema getInstance() {
+        if (instance == null) {
+            instance = new Cinema();
+        }
+        return instance;
+    }
+
+    public User seekUser(String cedula, String clave) throws Exception {
+        updateModel();
+        HashMap<String, User> users = getUsersMap();
+        User u = users.get(cedula);
+        if (u != null) {
+            if (u.valPass(clave)) {
+                return u;
+            } else {
+                throw new IOException("La contraseña digitada no es correcta");
+            }
+
+        } else {
+            throw new IOException("El usuario digitado no existe");
+        }
+    }
+
+    public HashMap<String, User> getUsersMap() throws Exception {
+        HashMap<String, User> users = new HashMap<>();
+        try {
+            users.putAll(getAdmins());
+            users.putAll(getClient());
+            return users;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    public void insertAdmin(String nom, String id, String em, String cllph, String pass) throws Exception {
+        try {
+            Administrator ad = new Administrator(nom, id, em, cllph, pass);
+            AdministratorDAO.getInstance().add(ad.getId(), ad);
+        } catch (Exception e) {
+            //throw new IOException("Este ID ya está registrado");
+            throw e;
+        }
+    }
+
+    public void insertClient(String nom, String id, String em, String cllph, String pass) throws Exception {
+        try {
+            Client cl = new Client(nom, id, em, cllph, pass);
+            ClientDAO.getInstance().add(cl.getId(), cl);
+        } catch (Exception e) {
+            //throw new IOException("Este ID ya está registrado");
+            throw e;
+        }
+    }
 
     public HashMap<String, Movie> getMovies() {
         return movies;
