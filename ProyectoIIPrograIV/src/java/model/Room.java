@@ -13,20 +13,20 @@ import java.util.HashMap;
  */
 public class Room {
 
-    private String name;
+    private String id;
     private HashMap<String, Integer> ticketOffice;
 
-    public Room(String nam) {
-        this.name=nam;
+    public Room(String id) {
+        this.id=id;
         this.ticketOffice = new HashMap<>();
     }
 
-    public String getName() {
-        return name;
+    public String getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(String name) {
+        this.id = id;
     }
 
     public HashMap<String, Integer> getTicketOffice() {
