@@ -10,71 +10,70 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Administrator;
+import model.ticketOffice;
 
 /**
  *
  * @author victo
  */
-public class TicketOfficeDAO implements DAO<String, Administrator> {
-    
-    private static AdministratorDAO instance = null;
+public class TicketOfficeDAO implements DAO<String, ticketOffice> {
+
+    private static TicketOfficeDAO instance = null;
 
     public int getCount() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
                     Statement stm = cnx.createStatement();
-                    ResultSet rs = stm.executeQuery(AdministratorCRUD.CMD_COUNT)) {
-                if (rs.next()) 
-                    return rs.getInt("total_administrators");                
+                    ResultSet rs = stm.executeQuery(TicketOfficeCRUD.CMD_COUNT)) {
+                if (rs.next()) {
+                    return rs.getInt("total_ticketOffices");
+                }
             } catch (SQLException ex) {
-                Logger.getLogger(AdministratorDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TicketOfficeDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdministratorDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TicketOfficeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return 0;
     }
 
-    public HashMap<String, Administrator> listAll() {
-        HashMap<String, Administrator> u = new HashMap<>();
+    public HashMap<String, ticketOffice> listAll() {
+        HashMap<String, ticketOffice> u = new HashMap<>();
         String username;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                     Statement stm = cnx.createStatement();
-                    ResultSet rs = stm.executeQuery(AdministratorCRUD.CMD_LIST)) {
+                    ResultSet rs = stm.executeQuery(TicketOfficeCRUD.CMD_LIST)) {
                 while (rs.next()) {
-                    username = rs.getString("username");
-                    u.put(username, (new Administrator(username, rs.getString("id"),
-                            rs.getString("email"), rs.getString("TelNum"), rs.getString("pass"))));
-                }   
+                    username = rs.getString("id");
+                    u.put(username, (new ticketOffice(username, rs.getInt("occupied"))));
+                }
             } catch (SQLException ex) {
-                Logger.getLogger(AdministratorDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TicketOfficeDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AdministratorDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TicketOfficeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return u;
     }
 
-    public static AdministratorDAO getInstance() throws Exception {
-        if (instance == null) 
-            instance = new AdministratorDAO();
+    public static TicketOfficeDAO getInstance() throws Exception {
+        if (instance == null) {
+            instance = new TicketOfficeDAO();
+        }
         return instance;
     }
 
     @Override
-    public void add(String id, Administrator value) throws IllegalArgumentException {
+    public void add(String id, ticketOffice value) throws IllegalArgumentException {
         try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
-                PreparedStatement stm = cnx.prepareStatement(AdministratorCRUD.CMD_ADD)) {
+                PreparedStatement stm = cnx.prepareStatement(TicketOfficeCRUD.CMD_ADD)) {
             stm.clearParameters();
-            stm.setString(1, value.getName());
-            stm.setString(2, value.getId());
-            stm.setString(3, value.getEmail());
-            stm.setString(4, value.getTelNum());
-            stm.setString(5, value.getPass());
+            stm.setString(1, value.getId());
+            stm.setInt(2, value.getOccupied());
             if (stm.executeUpdate() != 1) {
                 throw new IllegalArgumentException(
                         String.format("It couldn't add the register: '%s'", id));
@@ -84,7 +83,7 @@ public class TicketOfficeDAO implements DAO<String, Administrator> {
         }
     }
 
-    public void add(Administrator u) throws IllegalArgumentException {
+    public void add(ticketOffice u) throws IllegalArgumentException {
         try {
             add(u.getId(), u);
         } catch (IllegalArgumentException e) {
@@ -93,20 +92,19 @@ public class TicketOfficeDAO implements DAO<String, Administrator> {
     }
 
     @Override
-    public Administrator recover(String id, String pass) {
-        Administrator result = null;
+    public ticketOffice recover(String id, String pass) {
+        ticketOffice result = null;
         String username;
         try {
             try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
-                    PreparedStatement stm = cnx.prepareStatement(AdministratorCRUD.CMD_RECOVER)) {
+                    PreparedStatement stm = cnx.prepareStatement(TicketOfficeCRUD.CMD_RECOVER)) {
                 stm.clearParameters();
                 stm.setString(1, id);
                 stm.setString(2, pass);
                 try (ResultSet rs = stm.executeQuery()) {
                     if (rs.next()) {
                         username = rs.getString("username");
-                        result = new Administrator(username, rs.getString("id"),
-                                rs.getString("email"), rs.getString("TelNum"), rs.getString("pass"));
+                        result = new ticketOffice(username, rs.getInt("occupied"));
                     }
                 }
             }
@@ -118,9 +116,9 @@ public class TicketOfficeDAO implements DAO<String, Administrator> {
 
     @Override
     //This update only updates username, not sure about updating id
-    public void update(String id, Administrator value) {
+    public void update(String id, ticketOffice value) {
         try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
-                PreparedStatement stm = cnx.prepareStatement(AdministratorCRUD.CMD_UPDATE_USERNAME)) {
+                PreparedStatement stm = cnx.prepareStatement(TicketOfficeCRUD.CMD_UPDATE_USERNAME)) {
             stm.clearParameters();
             stm.setString(1, id);
             if (stm.executeUpdate() != 1) {
@@ -133,7 +131,7 @@ public class TicketOfficeDAO implements DAO<String, Administrator> {
         }
     }
 
-    public void update(Administrator u) {
+    public void update(ticketOffice u) {
         update(u.getId(), u);
     }
 
@@ -141,7 +139,7 @@ public class TicketOfficeDAO implements DAO<String, Administrator> {
     public void delete(String id) {
         try {
             try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
-                    PreparedStatement stm = cnx.prepareStatement(AdministratorCRUD.CMD_DELETE)) {
+                    PreparedStatement stm = cnx.prepareStatement(TicketOfficeCRUD.CMD_DELETE)) {
                 stm.clearParameters();
                 stm.setString(1, id);
                 if (stm.executeUpdate() != 1) {
