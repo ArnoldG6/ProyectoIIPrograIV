@@ -49,13 +49,19 @@ function showMovies() {
     //console.log(img_links);
     for (var m in img_links) {
         var source = img_links[m].source; //link de la imagen
-        var imgLI = document.createElement("li");
-        var imgDiv = document.createElement("div");
-        imgLI.id = img_links[m].id;
-        imgDiv.classname = "text-center";
-        imgDiv.innerHTML = '<img src= '+ source + ' width="250" height="300">';
-        imgLI.appendChild(imgDiv);
-        movies_img_list.appendChild(imgLI);
+        
+        var imgCard = document.createElement("div");
+        imgCard.id = img_links[m].id;
+        imgCard.class = "card p-3 bg-dark col w-15";      
+        
+        var imgAn = document.createElement("a");
+        imgAn.href = "#";
+        imgAn.class = "p-3 bg-dark text-center";
+        imgAn.classname = "text-center";
+        imgAn.innerHTML = '<img src= '+ source + ' width="250" height="300">';
+        
+        imgCard.appendChild(imgAn);
+        movies_img_list.appendChild(imgCard);
     }
 }
 
