@@ -6,12 +6,14 @@ package model;
  */
 public class Movie {
 
+    private String id;
     private String name;
     private String description;
     private String publicationYear;
     private String director;
 
-    public Movie(String _name, String _desc, String _publicY, String direct) {
+    public Movie(String _id, String _name, String _desc, String _publicY, String direct) {
+        this.id = _id;
         this.name = _name;
         this.description = _desc;
         this.publicationYear = _publicY;
@@ -19,7 +21,7 @@ public class Movie {
     }
 
     public Movie() {
-        this("", "", "", "");
+        this("", "", "", "", "");
     }
 
     public String getName() {
@@ -52,6 +54,14 @@ public class Movie {
 
     public void setDirector(String director) {
         this.director = director;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
 }

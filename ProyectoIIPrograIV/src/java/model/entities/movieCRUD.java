@@ -12,22 +12,22 @@ package model.entities;
 public class movieCRUD {
 
     protected static final String CMD_LIST
-            = "SELECT name, description, publicationYear, director FROM movie;";
+            = "SELECT id, name, description, publicationYear, director FROM movie;";
     protected static final String CMD_ADD
-            = "INSERT INTO movie (name, description, publicationYear, director) "
-            + "VALUES (?, ?, ?, ?); ";
+            = "INSERT INTO movie (id, name, description, publicationYear, director) "
+            + "VALUES (?, ?, ?, ?, ?); ";
     protected static final String CMD_RECOVER
-            = "SELECT name, description, publicationYear, director FROM movie "
-            + "WHERE name = ?; ";
+            = "SELECT id, name, description, publicationYear, director FROM movie "
+            + "WHERE id = ?; ";
     protected static final String CMD_UPDATE_USERNAME
-            = "UPDATE movie SET description = ?"
-            + "WHERE name = ?; ";
+            = "UPDATE movie SET name = ?"
+            + "WHERE id = ?; ";
     protected static final String CMD_UPDATE_ADMIN_ID
             = "UPDATE movie SET name = ?"
-            + "WHERE description = ?; ";
+            + "WHERE id = ?; ";
     protected static final String CMD_DELETE
             = "DELETE FROM movie "
-            + "WHERE name = ?; ";
+            + "WHERE id = ?; ";
     protected static final String CMD_COUNT
             = "SELECT COUNT(*) AS total_movies FROM movie;";
 }
