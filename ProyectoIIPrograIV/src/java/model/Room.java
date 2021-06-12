@@ -14,11 +14,11 @@ import java.util.HashMap;
 public class Room {
 
     private String id;
-    private HashMap<String, Integer> ticketOffice;
+    private HashMap<String, ticketOffice> ticketOffices;
 
     public Room(String id) {
-        this.id=id;
-        this.ticketOffice = new HashMap<>();
+        this.id = id;
+        this.ticketOffices = new HashMap<>();
     }
 
     public String getId() {
@@ -29,12 +29,12 @@ public class Room {
         this.id = id;
     }
 
-    public HashMap<String, Integer> getTicketOffice() {
-        return ticketOffice;
+    public HashMap<String, ticketOffice> getTicketOffice() {
+        return ticketOffices;
     }
 
-    public void setTicketOffice(HashMap<String, Integer> ticketOffice) {
-        this.ticketOffice = ticketOffice;
+    public void setTicketOffice(HashMap<String, ticketOffice> ticketOffice) {
+        this.ticketOffices = ticketOffice;
     }
 
 }
