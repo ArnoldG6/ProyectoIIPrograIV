@@ -20,6 +20,10 @@ public class Room {
         this.id = id;
         this.ticketOffices = new HashMap<>();
     }
+    
+    public Room(){
+        this("");
+    }
 
     public String getId() {
         return id;

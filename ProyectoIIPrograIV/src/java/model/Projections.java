@@ -11,19 +11,19 @@ public class Projections {
     private String number;
     private String date;
     private String hour;
-    private HashMap<String, Room> rooms;
-    private HashMap<String, Room> movies;
+    private Room rooms;
+    private Movie mov;
 
-    public Projections(String num, String dat, String hor) {
+    public Projections(String num, String dat, String hor, Room room1, Movie mov1) {
         this.number = num;
         this.date = dat;
         this.hour = hor;
-        this.rooms = new HashMap<>();
-        this.movies = new HashMap<>();
+        this.rooms = room1;
+        this.mov = mov1;
     }
 
     public Projections() {
-        this("", "", "");
+        this("", "", "", null, null);
     }
 
     public String getDate() {
@@ -42,28 +42,28 @@ public class Projections {
         this.hour = hour;
     }
 
-    public HashMap<String, Room> getRooms() {
-        return rooms;
-    }
-
-    public void setRooms(HashMap<String, Room> rooms) {
-        this.rooms = rooms;
-    }
-
-    public HashMap<String, Room> getMovies() {
-        return movies;
-    }
-
-    public void setMovies(HashMap<String, Room> movies) {
-        this.movies = movies;
-    }
-
     public String getNumber() {
         return number;
     }
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public Room getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(Room rooms) {
+        this.rooms = rooms;
+    }
+
+    public Movie getMov() {
+        return mov;
+    }
+
+    public void setMov(Movie mov) {
+        this.mov = mov;
     }
 
 }

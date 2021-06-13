@@ -9,7 +9,11 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Movie;
+import model.Projections;
+import model.Room;
 import model.Tickets;
+import model.ticketOffice;
 
 /**
  *
@@ -40,17 +44,43 @@ public class TicketsDAO implements DAO<String, Tickets> {
 
     public HashMap<String, Tickets> listAll() {
         HashMap<String, Tickets> u = new HashMap<>();
-        String username;
+        String id, roomId, movieId, ticketId, projectId;
+        Room r1;
+        Movie m1;
+        ticketOffice t1;
+        Projections pro1;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(TicketsCRUD.CMD_LIST)) {
+                HashMap<String, Movie> movs = movieDAO.getInstance().listAll();
+                HashMap<String, Room> rooms = RoomDAO.getInstance().listAll();
+                HashMap<String, ticketOffice> ticketOffices = TicketOfficeDAO.getInstance().listAll();
+                HashMap<String, Projections> projects = ProjectionsDAO.getInstance().listAll();
                 while (rs.next()) {
-                    username = rs.getString("id");
-                    u.put(username, (new Tickets(username)));
+                    try {
+                        roomId = rs.getString("Projections_room_id");
+                        movieId = rs.getString("Projections_Movie_id");
+                        ticketId = rs.getString("ticketOffice_id");
+                        projectId = rs.getString("Projections_id");
+                        r1 = rooms.get(roomId);
+                        m1 = movs.get(movieId);
+                        t1 = ticketOffices.get(roomId);
+                        pro1 = projects.get(movieId);
+                        if (r1 == null || m1 == null || t1 == null || pro1 == null) {
+                            throw new Exception("Error de movie o room DAO");
+                        }
+                        id = rs.getString("id");
+                        u.put(id, (new Tickets(id, t1, r1,
+                                pro1, m1)));
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
             } catch (SQLException ex) {
+                Logger.getLogger(TicketsDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
                 Logger.getLogger(TicketsDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (ClassNotFoundException ex) {
@@ -71,7 +101,7 @@ public class TicketsDAO implements DAO<String, Tickets> {
         try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(TicketsCRUD.CMD_ADD)) {
             stm.clearParameters();
-            stm.setString(1, value.getNumber());
+            stm.setString(1, value.getId());
             if (stm.executeUpdate() != 1) {
                 throw new IllegalArgumentException(
                         String.format("It couldn't add the register: '%s'", id));
@@ -83,7 +113,7 @@ public class TicketsDAO implements DAO<String, Tickets> {
 
     public void add(Tickets u) throws IllegalArgumentException {
         try {
-            add(u.getNumber(), u);
+            add(u.getId(), u);
         } catch (IllegalArgumentException e) {
             throw e;
         }
@@ -92,23 +122,6 @@ public class TicketsDAO implements DAO<String, Tickets> {
     @Override
     public Tickets recover(String id, String pass) {
         Tickets result = null;
-        String username;
-        try {
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
-                    PreparedStatement stm = cnx.prepareStatement(TicketsCRUD.CMD_RECOVER)) {
-                stm.clearParameters();
-                stm.setString(1, id);
-                stm.setString(2, pass);
-                try (ResultSet rs = stm.executeQuery()) {
-                    if (rs.next()) {
-                        username = rs.getString("id");
-                        result = new Tickets(username);
-                    }
-                }
-            }
-        } catch (SQLException ex) {
-            System.err.printf("Exception: '%s'%n", ex.getMessage());
-        }
         return result;
     }
 
@@ -121,7 +134,7 @@ public class TicketsDAO implements DAO<String, Tickets> {
             stm.setString(1, id);
             if (stm.executeUpdate() != 1) {
                 throw new IllegalArgumentException(
-                        String.format("It couldn't update the register: '%s'", value.getNumber()));
+                        String.format("It couldn't update the register: '%s'", value.getId()));
             }
         } catch (IllegalArgumentException | SQLException ex) {
             System.err.printf("Excepción: '%s'%n", ex.getMessage());
@@ -130,7 +143,7 @@ public class TicketsDAO implements DAO<String, Tickets> {
     }
 
     public void update(Tickets u) {
-        update(u.getNumber(), u);
+        update(u.getId(), u);
     }
 
     @Override
