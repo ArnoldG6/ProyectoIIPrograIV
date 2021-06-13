@@ -9,7 +9,7 @@ public class User implements java.io.Serializable {
     String email;
     String telNum;
     String pass;
-    int type;
+    String role;
 
     public User() {
         username = "";
@@ -17,7 +17,7 @@ public class User implements java.io.Serializable {
         email = "";
         telNum = "";
         pass = "";
-        type = 0;
+        role = "";
 
     }
 
@@ -25,8 +25,8 @@ public class User implements java.io.Serializable {
         return (this.pass).equals(pass);
     }
 
-    public int getType() {
-        return type;
+    public String getType() {
+        return role;
     }
 
     public String getPass() {

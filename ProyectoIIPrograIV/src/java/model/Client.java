@@ -20,7 +20,7 @@ public class Client extends User {
         this.email = email;
         this.telNum = telNum;
         this.pass = pass;
-        this.type = 3;
+        this.role = "CLI";
     }
 
     @Override
@@ -30,7 +30,7 @@ public class Client extends User {
         s.append("ID:").append(id).append(".\n");
         s.append("Email: ").append(email).append(".\n");
         s.append("Password:").append(pass).append(".\n");
-        s.append("Type:").append(String.valueOf(type)).append(".\n");
+        s.append("Type:").append(role).append(".\n");
         return s.toString();
     }
 

@@ -4,7 +4,7 @@ var url="http://localhost:8080/ExamenPrograIV/";
         if (!loginValidar()) return;
         usuario = {
             id: $("#id").val(),
-            clave: $("#clave").val()
+            pass: $("#pass").val()
         };       
         let request = new Request(url+'api/login', {method: 'POST', headers: { 'Content-Type': 'application/json'},body: JSON.stringify(usuario)});
         (async ()=>{

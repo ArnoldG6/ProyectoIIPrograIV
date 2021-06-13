@@ -12,32 +12,37 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import model.Cinema;
 
 @Path("/login")
 @PermitAll
 public class Login {
+
     @Context
     HttpServletRequest request;
-    
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)    
-    public User login(User usuario) {  
-            User logged=null;
-            
-            try {
-                
-                return null;
-            } catch (Exception ex) {
-                throw new NotFoundException();
-            }  
+    @Produces(MediaType.APPLICATION_JSON)
+    public User login(User usuario) {
+        User logged = null;
+        try {
+            logged = Cinema.getInstance().getUsersMap().get(usuario);
+            if (!logged.getPass().equals(usuario.getPass())) {
+                throw new Exception("Clave incorrecta");
+            }
+            request.getSession(true).setAttribute("user", logged);
+            return null;
+        } catch (Exception ex) {
+            throw new NotFoundException();
+        }
     }
-    
-    @DELETE 
-    public void logout() {  
+
+    @DELETE
+    public void logout() {
         HttpSession session = request.getSession(true);
-        session.removeAttribute("user");           
+        session.removeAttribute("user");
         session.invalidate();
     }
-    
+
 }
