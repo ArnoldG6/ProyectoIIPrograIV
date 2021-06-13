@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Projections;
-import model.ticketOffice;
 
 /**
  *
@@ -52,10 +51,10 @@ public class ProjectionsDAO implements DAO<String, Projections> {
                     u.put(username, (new Projections(username, rs.getString("date"), rs.getString("hour"))));
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(TicketOfficeDAO.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ProjectionsDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TicketOfficeDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProjectionsDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return u;
     }
