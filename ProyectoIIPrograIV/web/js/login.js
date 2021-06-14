@@ -15,7 +15,7 @@ var url="http://localhost:8080/ExamenPrograIV/";
             $('#loginDialog').modal('hide');            
            switch(usuario.rol){
                case 'ADM': document.location = url+"listado.html"; break;
-               case 'CLI': document.location = url+"about.html"; break;
+               case 'CLI': document.location = url+"index.html"; break;
            }                           
         })(); 
     }
@@ -31,7 +31,7 @@ var url="http://localhost:8080/ExamenPrograIV/";
             const response = await fetch(request);
             if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return;}
             sessionStorage.removeItem('user');
-            document.location = url+"about.html";                         
+            document.location = url+"index.html";                         
         })();          
     }
 
