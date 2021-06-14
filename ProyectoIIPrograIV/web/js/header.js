@@ -37,8 +37,8 @@ var menu=`
             else{
               menu+=`
                 <li class='nav-item'>
-                    <a class='nav-link' href='#' data-toggle='modal' data-target='#loginDialog'>Login</a>
-                </li>`;           
+                    <a class='nav-link' href='#'>Login</a>
+                </li>`;
             }
             menu+=`
         </ul>
