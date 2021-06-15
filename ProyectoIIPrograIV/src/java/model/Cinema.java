@@ -2,6 +2,8 @@ package model;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.entities.AdministratorDAO;
 import model.entities.ClientDAO;
 
@@ -26,6 +28,11 @@ public class Cinema {
         rooms = new HashMap<>();
         admins = new HashMap<>();
         client = new HashMap<>();
+        try {
+            insertAdmin("root", "root", "root", "root", "root");
+        } catch (Exception ex) {
+            Logger.getLogger(Cinema.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public final void updateModel() throws Exception {
@@ -57,10 +64,12 @@ public class Cinema {
     }
 
     public HashMap<String, User> getUsersMap() throws Exception {
+        updateModel();
         HashMap<String, User> users = new HashMap<>();
         try {
             users.putAll(getAdmins());
             users.putAll(getClient());
+            users.toString();
             return users;
         } catch (Exception e) {
             throw e;

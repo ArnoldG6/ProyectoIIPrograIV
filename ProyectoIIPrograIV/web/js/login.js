@@ -14,7 +14,7 @@ var url="http://localhost:8080/ExamenPrograIV/";
             sessionStorage.setItem('user', JSON.stringify(usuario));
             $('#loginDialog').modal('hide');            
            switch(usuario.rol){
-               case 'ADM': document.location = url+"listado.html"; break;
+               case 'ADM': document.location = url+"index.html"; break;
                case 'CLI': document.location = url+"index.html"; break;
            }                           
         })(); 

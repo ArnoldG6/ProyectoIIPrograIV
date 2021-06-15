@@ -1,33 +1,30 @@
 var menu=`
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="#"><div>HOME</div></a>
+      <a class="navbar-brand" href="index.html"><div>HOME</div></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" >
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="menu">
         <ul class="navbar-nav ml-auto" id="menuUl">
           <li class="nav-item">
-            <a class="nav-link" href="#">A</a>
+            <a class="nav-link" href="index.html">Contact us</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Register</a>
-          </li>`;        
-         
-         
-
+            <a class="nav-link" href="index.html">Register</a>
+          </li>`;
           
-            let userJson = sessionStorage.getItem('user');
+            let usuarioJson = sessionStorage.getItem('user');
             
-            if (userJson!=null){ 
-                let user= JSON.parse(userJson);
-                if (['ADM','CLI'].includes(user.role)){
-                    menu+=`<li class='nav-item'> <a class='nav-link' href='Presentation/MyMovies.html'>My Movies</a></li>`;
+            if (usuarioJson!=null){ 
+                let usuario= JSON.parse(usuarioJson);
+                if (['ADM','CLI'].includes(usuario.rol)){
+                    menu+=`<li class='nav-item'> <a class='nav-link' href='listado.html'>Listado</a> </li>`;
                 }
 
                 menu+=`
                     <li class='nav-item dropdown'>
-                      <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#'> ${user.username}</a>
+                      <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#'> ${usuario.nombre}</a>
                       <div class='dropdown-menu'>
                         <a class='dropdown-item' id='logout'>Salir</a>
                       </div>
@@ -36,8 +33,8 @@ var menu=`
             else{
               menu+=`
                 <li class='nav-item'>
-                    <a class='nav-link' href='#' data-toggle='modal' data-target='#loginDialog'>Login</a>
-                </li>`;
+                    <a class='nav-link' href='#' data-toggle='modal' data-target='#loginDialog'>Iniciar Sesión</a>
+                </li>`;           
             }
             menu+=`
         </ul>
@@ -50,4 +47,3 @@ var menu=`
   }
   
   $(loadMenu);  
-
