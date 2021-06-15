@@ -28,16 +28,17 @@ public class Cinema {
         rooms = new HashMap<>();
         admins = new HashMap<>();
         client = new HashMap<>();
-        try {
-            insertAdmin("root", "root", "root", "root", "root");
-        } catch (Exception ex) {
-            Logger.getLogger(Cinema.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }
 
     public final void updateModel() throws Exception {
         Cinema.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
         Cinema.getInstance().setClient(ClientDAO.getInstance().listAll());
+        try {
+            insertAdmin("root", "root", "root", "root", "root");
+        } catch (Exception ex) {
+            Logger.getLogger(Cinema.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public static Cinema getInstance() {
@@ -50,6 +51,7 @@ public class Cinema {
     public User seekUser(String cedula, String clave) throws Exception {
         updateModel();
         HashMap<String, User> users = getUsersMap();
+        System.out.printf("USUARIOS: %d\n",users.size());
         User u = users.get(cedula);
         if (u != null) {
             if (u.valPass(clave)) {

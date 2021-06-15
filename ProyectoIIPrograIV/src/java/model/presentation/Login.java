@@ -27,12 +27,13 @@ public class Login {
     public User login(User usuario) {
         User logged = null;
         try {
-            logged = Cinema.getInstance().getUsersMap().get(usuario);
-            if (!logged.getPass().equals(usuario.getPass())) {
-                throw new Exception("Clave incorrecta");
-            }
+            //logged = Cinema.getInstance().getUsersMap().get(usuario.getId());
+            logged = Cinema.getInstance().seekUser(usuario.getId(), usuario.getPass());
+            //if (!logged.getPass().equals(usuario.getPass())) {
+            //    throw new Exception("Clave incorrecta");
+            //}
             request.getSession(true).setAttribute("user", logged);
-            return null;
+            return logged;
         } catch (Exception ex) {
             throw new NotFoundException();
         }
