@@ -28,17 +28,14 @@ public class Cinema {
         rooms = new HashMap<>();
         admins = new HashMap<>();
         client = new HashMap<>();
+        admins.put("root", new Administrator("root", "root", "root", "root", "root"));
+        System.out.println("zxxxxx");
 
     }
 
     public final void updateModel() throws Exception {
         Cinema.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
         Cinema.getInstance().setClient(ClientDAO.getInstance().listAll());
-        try {
-            insertAdmin("root", "root", "root", "root", "root");
-        } catch (Exception ex) {
-            Logger.getLogger(Cinema.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     public static Cinema getInstance() {
