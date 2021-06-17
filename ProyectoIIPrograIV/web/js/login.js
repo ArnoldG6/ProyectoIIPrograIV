@@ -18,9 +18,13 @@ var url="http://localhost:8080/ExamenPrograIV/";
             console.log("tamos aqui xd");
             $('#loginDialog').modal('hide');
             console.log("cerrando modal de login xd");
-           switch(usuario.rol){
-               case 'ADM': document.location = url+"index.html"; break;
-               case 'CLI': document.location = url+"index.html"; break;
+           switch(usuario.role){
+               case 'ADM': document.location = url;
+                   //window.location.replace(url+"index.html");
+                   break;
+               case 'CLI': document.location = url;
+                   //window.location.replace(url+"index.html");
+                   break;
            }                           
         })(); 
     }

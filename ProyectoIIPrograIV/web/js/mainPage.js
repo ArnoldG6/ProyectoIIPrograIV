@@ -52,12 +52,11 @@ function showMovies() {
         
         var imgCard = document.createElement("div");
         imgCard.id = img_links[m].id;
-        imgCard.class = "card p-3 bg-dark col w-15";      
+        imgCard.class = "card p-3 bg-dark col w-15 test";      
         
         var imgAn = document.createElement("a");
         imgAn.href = "#";
-        imgAn.class = "p-3 bg-dark text-center";
-        imgAn.classname = "text-center";
+        imgAn.classname = "p-3 bg-dark text-center";
         imgAn.innerHTML = '<img src= '+ source + ' width="250" height="300">';
         
         imgCard.appendChild(imgAn);
