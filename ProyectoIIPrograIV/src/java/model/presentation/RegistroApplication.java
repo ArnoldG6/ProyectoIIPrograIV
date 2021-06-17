@@ -13,7 +13,8 @@ public class RegistroApplication extends Application {
 
         HashSet<Class<?>> classes = new HashSet<>();
         classes.add(MultiPartFeature.class);
-        classes.add(Login.class);        
+        classes.add(Login.class);  
+        classes.add(Register.class);
         return classes;
     }   
 }

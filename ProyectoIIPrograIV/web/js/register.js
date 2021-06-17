@@ -7,15 +7,14 @@ var url="http://localhost:8080/ExamenPrograIV/";
             id: $("#r_id").val(),
             email: $("#r_email").val(),
             telNum: $("#r_telNum").val(),
-            pass: $("#r_pass").val(),
-            role: $("#r_role").val()
+            pass: $("#r_pass").val()
         };       
         let request = new Request(url+'api/register', {method: 'POST', headers: { 'Content-Type': 'application/json'},body: JSON.stringify(usuario)});
         (async ()=>{
             const response = await fetch(request);
             if (!response.ok) {errorMessage(response.status,$("#registerDialog #errorDiv"));return;}
             usuario = await response.json();
-            $('#loginDialog').modal('hide');
+            $('#registerDialog').modal('hide');
             document.location = url;
         })(); 
     }
@@ -37,7 +36,7 @@ var url="http://localhost:8080/ExamenPrograIV/";
     }  
   
   function loadRegister(){
-        let request = new Request(url+'login.html', {method: 'GET'});
+        let request = new Request(url+'register.html', {method: 'GET'});
         (async ()=>{
             const response = await fetch(request);
             if (!response.ok) {errorMessage(response.status,$("#registerDialog #errorDiv"));return;}

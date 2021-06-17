@@ -45,8 +45,6 @@ public class Cinema {
             ("Error: "+u.getTelNum()+" ya está registrado.");
         }
         ClientDAO.getInstance().add(c);
-    // do what you have to do here
-    // In your case, another loop.
 
     }
     public static Cinema getInstance() {
