@@ -16,15 +16,15 @@ var menu=`
           
             let usuarioJson = sessionStorage.getItem('user');
             
-            if (usuarioJson!=null){ 
+            if (usuarioJson!==null){ 
                 let usuario= JSON.parse(usuarioJson);
-                if (['ADM','CLI'].includes(usuario.rol)){
+                if (['ADM','CLI'].includes(usuario.role)){
                     menu+=`<li class='nav-item'> <a class='nav-link' href='listado.html'>Listado</a> </li>`;
                 }
 
                 menu+=`
                     <li class='nav-item dropdown'>
-                      <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#'> ${usuario.nombre}</a>
+                      <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#'> ${usuario.name}</a>
                       <div class='dropdown-menu'>
                         <a class='dropdown-item' id='logout'>Salir</a>
                       </div>

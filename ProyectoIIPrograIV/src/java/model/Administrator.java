@@ -12,7 +12,7 @@ package model;
 public class Administrator extends User {
 
     public Administrator(String username, String id, String email, String telNum, String pass) {
-        this.username = username;
+        this.name = username;
         this.id = id.toUpperCase();
         this.email = email;
         this.telNum = telNum;
@@ -23,11 +23,11 @@ public class Administrator extends User {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        s.append("Username:").append(username).append(".\n");
-        s.append("ID:").append(id).append(".\n");
-        s.append("Email: ").append(email).append(".\n");
-        s.append("Password:").append(pass).append(".\n");
-        s.append("Type:").append(role).append(".\n");
+        s.append("Username:").append(getName()).append(".\n");
+        s.append("ID:").append(getId()).append(".\n");
+        s.append("Email: ").append(getEmail()).append(".\n");
+        s.append("Password:").append(getPass()).append(".\n");
+        s.append("Type:").append(getRole()).append(".\n");
         return s.toString();
     }
 
