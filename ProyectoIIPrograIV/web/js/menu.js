@@ -10,9 +10,9 @@ var menu=`
           <li class="nav-item">
             <a class="nav-link" href="index.html">Contact us</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Register</a>
-          </li>`;
+          <li class='nav-item'>
+                <a class='nav-link' href='#' data-toggle='modal' data-target='#loginDialog'>Register</a>
+          </li>`;  
           
             let usuarioJson = sessionStorage.getItem('user');
             

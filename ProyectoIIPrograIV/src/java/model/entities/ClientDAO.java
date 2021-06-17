@@ -23,7 +23,7 @@ public class ClientDAO implements DAO<String, Client> {
     public int getCount() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(ClientCRUD.CMD_COUNT)) {
                 if (rs.next()) 
@@ -43,7 +43,7 @@ public class ClientDAO implements DAO<String, Client> {
         String username;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(ClientCRUD.CMD_LIST)) {
                 while (rs.next()) {
@@ -68,7 +68,7 @@ public class ClientDAO implements DAO<String, Client> {
 
     @Override
     public void add(String id, Client value) throws IllegalArgumentException {
-        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+        try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(ClientCRUD.CMD_ADD)) {
             stm.clearParameters();
             stm.setString(1, value.getName());
@@ -98,7 +98,7 @@ public class ClientDAO implements DAO<String, Client> {
         Client result = null;
         String username;
         try {
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                     PreparedStatement stm = cnx.prepareStatement(ClientCRUD.CMD_RECOVER)) {
                 stm.clearParameters();
                 stm.setString(1, id);
@@ -120,7 +120,7 @@ public class ClientDAO implements DAO<String, Client> {
     @Override
     //This update only updates username, not sure about updating id
     public void update(String id, Client value) {
-        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+        try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(ClientCRUD.CMD_UPDATE_USERNAME)) {
             stm.clearParameters();
             stm.setString(1, id);
@@ -141,7 +141,7 @@ public class ClientDAO implements DAO<String, Client> {
     @Override
     public void delete(String id) {
         try {
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                     PreparedStatement stm = cnx.prepareStatement(ClientCRUD.CMD_DELETE)) {
                 stm.clearParameters();
                 stm.setString(1, id);

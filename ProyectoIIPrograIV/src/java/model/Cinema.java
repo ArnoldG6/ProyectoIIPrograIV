@@ -33,11 +33,26 @@ public class Cinema {
         Cinema.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
         Cinema.getInstance().setClient(ClientDAO.getInstance().listAll());
     }
-
-    public static Cinema getInstance() {
-        if (instance == null) {
-            instance = new Cinema();
+    public void insertClient(Client c) throws Exception{
+        HashMap<String, User> users = Cinema.getInstance().getUsersMap();
+        for(HashMap.Entry<String, User> user : users.entrySet()) {
+            User u = users.get(c.getId());
+            if(u.getEmail().equals(c.getEmail())) throw new IOException
+            ("Error: "+c.getEmail()+" ya está registrado.");
+            if(u.getId().equals(c.getId())) throw new IOException
+            ("Error: "+c.getId()+" ya está registrado.");
+            if(u.getTelNum().equals(c.getTelNum())) throw new IOException
+            ("Error: "+u.getTelNum()+" ya está registrado.");
         }
+        ClientDAO.getInstance().add(c);
+    // do what you have to do here
+    // In your case, another loop.
+
+    }
+    public static Cinema getInstance() {
+        if (instance == null) 
+            instance = new Cinema();
+        
         return instance;
     }
 
