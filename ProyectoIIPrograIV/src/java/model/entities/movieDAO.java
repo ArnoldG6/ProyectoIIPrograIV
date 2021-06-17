@@ -28,7 +28,7 @@ public class movieDAO implements DAO<String, Movie> {
     public int getCount() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(movieCRUD.CMD_COUNT)) {
                 if (rs.next()) {
@@ -49,7 +49,7 @@ public class movieDAO implements DAO<String, Movie> {
         String username;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(movieCRUD.CMD_LIST)) {
                 while (rs.next()) {
@@ -75,7 +75,7 @@ public class movieDAO implements DAO<String, Movie> {
 
     @Override
     public void add(String id, Movie value) throws IllegalArgumentException {
-        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+        try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(movieCRUD.CMD_ADD)) {
             stm.clearParameters();
             stm.setString(1, value.getId());
@@ -105,7 +105,7 @@ public class movieDAO implements DAO<String, Movie> {
         Movie result = null;
         String username;
         try {
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                     PreparedStatement stm = cnx.prepareStatement(movieCRUD.CMD_RECOVER)) {
                 stm.clearParameters();
                 stm.setString(1, id);
@@ -127,7 +127,7 @@ public class movieDAO implements DAO<String, Movie> {
     @Override
     //This update only updates username, not sure about updating id
     public void update(String id, Movie value) {
-        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+        try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(movieCRUD.CMD_UPDATE_USERNAME)) {
             stm.clearParameters();
             stm.setString(1, id);
@@ -148,7 +148,7 @@ public class movieDAO implements DAO<String, Movie> {
     @Override
     public void delete(String id) {
         try {
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                     PreparedStatement stm = cnx.prepareStatement(movieCRUD.CMD_DELETE)) {
                 stm.clearParameters();
                 stm.setString(1, id);

@@ -23,7 +23,7 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
     public int getCount() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(TicketOfficeCRUD.CMD_COUNT)) {
                 if (rs.next()) {
@@ -44,7 +44,7 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
         String username;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(TicketOfficeCRUD.CMD_LIST)) {
                 while (rs.next()) {
@@ -69,7 +69,7 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
 
     @Override
     public void add(String id, ticketOffice value) throws IllegalArgumentException {
-        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+        try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(TicketOfficeCRUD.CMD_ADD)) {
             stm.clearParameters();
             stm.setString(1, value.getId());
@@ -96,7 +96,7 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
         ticketOffice result = null;
         String username;
         try {
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                     PreparedStatement stm = cnx.prepareStatement(TicketOfficeCRUD.CMD_RECOVER)) {
                 stm.clearParameters();
                 stm.setString(1, id);
@@ -117,7 +117,7 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
     @Override
     //This update only updates username, not sure about updating id
     public void update(String id, ticketOffice value) {
-        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+        try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(TicketOfficeCRUD.CMD_UPDATE_USERNAME)) {
             stm.clearParameters();
             stm.setString(1, id);
@@ -138,7 +138,7 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
     @Override
     public void delete(String id) {
         try {
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                     PreparedStatement stm = cnx.prepareStatement(TicketOfficeCRUD.CMD_DELETE)) {
                 stm.clearParameters();
                 stm.setString(1, id);

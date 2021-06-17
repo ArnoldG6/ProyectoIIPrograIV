@@ -6,25 +6,16 @@ var url="http://localhost:8080/ExamenPrograIV/";
             id: $("#id").val(),
             pass: $("#pass").val()
         };       
-        console.log("id: "+$("#id").val());
-        console.log("pass: "+$("#pass").val());
         let request = new Request(url+'api/login', {method: 'POST', headers: { 'Content-Type': 'application/json'},body: JSON.stringify(usuario)});
         (async ()=>{
             const response = await fetch(request);
             if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return;}
             usuario = await response.json();
             sessionStorage.setItem('user', JSON.stringify(usuario));
-            console.log(sessionStorage.getItem('user'));
-            console.log("tamos aqui xd");
             $('#loginDialog').modal('hide');
-            console.log("cerrando modal de login xd");
            switch(usuario.role){
-               case 'ADM': document.location = url;
-                   //window.location.replace(url+"index.html");
-                   break;
-               case 'CLI': document.location = url;
-                   //window.location.replace(url+"index.html");
-                   break;
+               case 'ADM': document.location = url; break;
+               case 'CLI': document.location = url; break;
            }                           
         })(); 
     }

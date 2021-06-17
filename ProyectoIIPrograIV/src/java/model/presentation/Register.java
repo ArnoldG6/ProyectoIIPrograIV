@@ -22,8 +22,13 @@ public class Register {
     @Produces(MediaType.APPLICATION_JSON)    
     public void register(User usuario) {  
             try {
-                Cinema.getInstance().insertClient(new Client(usuario.getName(), usuario.getId(), 
-                        usuario.getEmail(), usuario.getTelNum(), usuario.getPass()));
+                if(usuario == null) throw new Exception("Usuario no creado");
+                Client cli = new Client(usuario.getName(), usuario.getId(), 
+                        usuario.getEmail(), usuario.getTelNum(), usuario.getPass());
+                if(cli == null) throw new Exception("Usuario no creado");
+                Cinema.getInstance().insertClient(cli);
+                System.out.println(usuario);
+                System.out.println(cli);
             } catch (Exception ex) {
                 System.out.println(ex);
                 throw new NotFoundException();

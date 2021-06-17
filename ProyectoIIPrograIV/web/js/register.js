@@ -9,11 +9,13 @@ var url="http://localhost:8080/ExamenPrograIV/";
             telNum: $("#r_telNum").val(),
             pass: $("#r_pass").val()
         };       
-        let request = new Request(url+'api/register', {method: 'POST', headers: { 'Content-Type': 'application/json'},body: JSON.stringify(usuario)});
+        console.log(usuario);
+        let request = new Request(url+'api/register', {method: 'POST', headers: { 'Content-Type': 'application/json'},body: JSON.stringify((usuario))});
         (async ()=>{
             const response = await fetch(request);
-            if (!response.ok) {errorMessage(response.status,$("#registerDialog #errorDiv"));return;}
+            if (!response.ok) {errorMessage(response.status,$("#registerDialog #r_errorDiv"));return;}
             usuario = await response.json();
+            //sessionStorage.setItem('user', JSON.stringify(((usuario))));
             $('#registerDialog').modal('hide');
             document.location = url;
         })(); 
@@ -39,7 +41,7 @@ var url="http://localhost:8080/ExamenPrograIV/";
         let request = new Request(url+'register.html', {method: 'GET'});
         (async ()=>{
             const response = await fetch(request);
-            if (!response.ok) {errorMessage(response.status,$("#registerDialog #errorDiv"));return;}
+            if (!response.ok) {errorMessage(response.status,$("#registerDialog #r_errorDiv"));return;}
             content = await response.text();
             $('body').append(content); 
             $("#register").click(register);                         

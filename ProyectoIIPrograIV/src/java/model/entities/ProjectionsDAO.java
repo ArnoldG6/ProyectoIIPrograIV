@@ -24,7 +24,7 @@ public class ProjectionsDAO implements DAO<String, Projections> {
     public int getCount() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(ProjectionsCRUD.CMD_COUNT)) {
                 if (rs.next()) {
@@ -45,7 +45,7 @@ public class ProjectionsDAO implements DAO<String, Projections> {
         String id, roomId, movieId;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(ProjectionsCRUD.CMD_LIST)) {
                 Room r1;
@@ -84,7 +84,7 @@ public class ProjectionsDAO implements DAO<String, Projections> {
 
     @Override
     public void add(String id, Projections value) throws IllegalArgumentException {
-        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+        try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(ProjectionsCRUD.CMD_ADD)) {
             stm.clearParameters();
             stm.setString(1, value.getNumber());
@@ -118,7 +118,7 @@ public class ProjectionsDAO implements DAO<String, Projections> {
     @Override
     //This update only updates username, not sure about updating id
     public void update(String id, Projections value) {
-        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+        try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(ProjectionsCRUD.CMD_UPDATE_USERNAME)) {
             stm.clearParameters();
             stm.setString(1, id);
@@ -139,7 +139,7 @@ public class ProjectionsDAO implements DAO<String, Projections> {
     @Override
     public void delete(String id) {
         try {
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                     PreparedStatement stm = cnx.prepareStatement(ProjectionsCRUD.CMD_DELETE)) {
                 stm.clearParameters();
                 stm.setString(1, id);

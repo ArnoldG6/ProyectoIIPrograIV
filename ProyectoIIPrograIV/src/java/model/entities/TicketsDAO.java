@@ -26,7 +26,7 @@ public class TicketsDAO implements DAO<String, Tickets> {
     public int getCount() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(AdministratorCRUD.CMD_COUNT)) {
                 if (rs.next()) {
@@ -51,7 +51,7 @@ public class TicketsDAO implements DAO<String, Tickets> {
         Projections pro1;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(TicketsCRUD.CMD_LIST)) {
                 HashMap<String, Movie> movs = movieDAO.getInstance().listAll();
@@ -98,7 +98,7 @@ public class TicketsDAO implements DAO<String, Tickets> {
 
     @Override
     public void add(String id, Tickets value) throws IllegalArgumentException {
-        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+        try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(TicketsCRUD.CMD_ADD)) {
             stm.clearParameters();
             stm.setString(1, value.getId());
@@ -128,7 +128,7 @@ public class TicketsDAO implements DAO<String, Tickets> {
     @Override
     //This update only updates username, not sure about updating id
     public void update(String id, Tickets value) {
-        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+        try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(TicketsCRUD.CMD_UPDATE_USERNAME)) {
             stm.clearParameters();
             stm.setString(1, id);
@@ -149,7 +149,7 @@ public class TicketsDAO implements DAO<String, Tickets> {
     @Override
     public void delete(String id) {
         try {
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                     PreparedStatement stm = cnx.prepareStatement(TicketsCRUD.CMD_DELETE)) {
                 stm.clearParameters();
                 stm.setString(1, id);
