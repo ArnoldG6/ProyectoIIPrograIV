@@ -26,7 +26,6 @@ public class Cinema {
         rooms = new HashMap<>();
         admins = new HashMap<>();
         clients = new HashMap<>();
-        admins.put("root", new Administrator("root", "root", "root", "root", "root"));
 
     }
 
@@ -42,11 +41,11 @@ public class Cinema {
         return instance;
     }
 
-    public User seekUser(String cedula, String clave) throws Exception {
+    public User seekUser(String id, String clave) throws Exception {
         //updateModel();
         HashMap<String, User> users = Cinema.getInstance().getUsersMap();
         System.out.printf("USUARIOS: %s\n",users.toString());
-        User u = users.get(cedula);
+        User u = users.get(id);
         if (u != null) 
             if (u.correctPswd(clave)) 
                 return u;
@@ -60,7 +59,7 @@ public class Cinema {
     }
 
     public HashMap<String, User> getUsersMap() throws Exception {
-        //updateModel();
+        updateModel();
         HashMap<String, User> users = new HashMap<>();
         try {
             users.putAll(admins);
@@ -129,7 +128,7 @@ public class Cinema {
     }
 
     public void setAdmins(HashMap<String, Administrator> admins) {
-        this.admins = admins;
+        this.admins = admins; 
     }
 
     public HashMap<String, Client> getClient() {

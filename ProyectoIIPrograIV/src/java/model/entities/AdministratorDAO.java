@@ -25,11 +25,11 @@ import model.Administrator;
 public class AdministratorDAO implements DAO<String, Administrator> {
 
     private static AdministratorDAO instance = null;
-
+    static final String path = "jdbc:mysql://localhost:3306/cinema?useSSL=false";
     public int getCount() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection(path, "root", "root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(AdministratorCRUD.CMD_COUNT)) {
                 if (rs.next()) 
@@ -49,7 +49,7 @@ public class AdministratorDAO implements DAO<String, Administrator> {
         String username;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/university?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection(path, "root", "root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(AdministratorCRUD.CMD_LIST)) {
                 while (rs.next()) {
@@ -74,7 +74,7 @@ public class AdministratorDAO implements DAO<String, Administrator> {
 
     @Override
     public void add(String id, Administrator value) throws IllegalArgumentException {
-        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+        try (Connection cnx = DriverManager.getConnection(path, "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(AdministratorCRUD.CMD_ADD)) {
             stm.clearParameters();
             stm.setString(1, value.getName());
@@ -104,7 +104,7 @@ public class AdministratorDAO implements DAO<String, Administrator> {
         Administrator result = null;
         String username;
         try {
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection(path, "root", "root");
                     PreparedStatement stm = cnx.prepareStatement(AdministratorCRUD.CMD_RECOVER)) {
                 stm.clearParameters();
                 stm.setString(1, id);
@@ -126,7 +126,7 @@ public class AdministratorDAO implements DAO<String, Administrator> {
     @Override
     //This update only updates username, not sure about updating id
     public void update(String id, Administrator value) {
-        try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+        try (Connection cnx = DriverManager.getConnection(path, "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(AdministratorCRUD.CMD_UPDATE_USERNAME)) {
             stm.clearParameters();
             stm.setString(1, id);
@@ -147,7 +147,7 @@ public class AdministratorDAO implements DAO<String, Administrator> {
     @Override
     public void delete(String id) {
         try {
-            try (Connection cnx = DriverManager.getConnection("jdbc:mysql://localhost:3306/cinema?useSSL=false", "root", "root");
+            try (Connection cnx = DriverManager.getConnection(path, "root", "root");
                     PreparedStatement stm = cnx.prepareStatement(AdministratorCRUD.CMD_DELETE)) {
                 stm.clearParameters();
                 stm.setString(1, id);
