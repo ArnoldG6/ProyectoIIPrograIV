@@ -27,11 +27,11 @@ public class RegisterRoom {
     public void register(Room room) {  
             try {
                 if(room == null) throw new Exception("Sala no creada");
-                Room cli = new Room(room.getId());
-                if(cli == null) throw new Exception("Sala no creada");
-                Cinema.getInstance().insertRoom(cli);
+                Room room2 = new Room(room.getId());
+                if(room2 == null) throw new Exception("Sala no creada");
+                Cinema.getInstance().insertRoom(room2);
                 System.out.println(room);
-                System.out.println(cli);
+                System.out.println(room2);
             } catch (Exception ex) {
                 System.out.println(ex);
                 throw new NotFoundException();

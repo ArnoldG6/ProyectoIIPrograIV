@@ -18,7 +18,7 @@ public class RoomDAO implements DAO<String, Room> {
         String id;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            try (Connection cnx = DriverManager.getConnection(RoomCRUD.path,"root","root");
+            try (Connection cnx = DriverManager.getConnection(DAO.path,"root","root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(RoomCRUD.CMD_LIST)) {
                 while (rs.next()) {
@@ -39,8 +39,8 @@ public class RoomDAO implements DAO<String, Room> {
     }
     @Override
     public void add(String id, Room value) {
-        try (Connection cnx = DriverManager.getConnection(RoomCRUD.path,"root","root");
-            PreparedStatement stm = cnx.prepareStatement(movieCRUD.CMD_ADD)) {
+        try (Connection cnx = DriverManager.getConnection(DAO.path,"root","root");
+            PreparedStatement stm = cnx.prepareStatement(RoomCRUD.CMD_ADD)) {
             stm.clearParameters();
             stm.setString(1, value.getId());
             if (stm.executeUpdate() != 1) {

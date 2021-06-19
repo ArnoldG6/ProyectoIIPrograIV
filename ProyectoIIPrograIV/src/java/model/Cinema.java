@@ -50,13 +50,9 @@ public class Cinema {
     }
     
     public void insertRoom(Room c) throws Exception{
-        HashMap<String, Room> rooms = Cinema.getInstance().getRooms();
-        for(HashMap.Entry<String, Room> user : rooms.entrySet()) {
-            Room u = rooms.get(user.getKey());
-            if(u.getId().equals(c.getId())) throw new IOException
-            ("Error: "+c.getId()+" ya está registrado.");
-        }
-        RoomDAO.getInstance().add(c.getId(), c);
+        Room room = Cinema.getInstance().getRooms().get(c.getId());
+        if(room == null) RoomDAO.getInstance().add(c.getId(), c);
+        else throw new Exception("La sala "+c.getId()+" ya está registrada." );
     }
     
     public void insertMovie(Movie m) throws Exception{
