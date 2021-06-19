@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import model.entities.AdministratorDAO;
 import model.entities.ClientDAO;
+import model.entities.RoomDAO;
 
 /**
  *
@@ -45,8 +46,18 @@ public class Cinema {
             ("Error: "+u.getTelNum()+" ya está registrado.");
         }
         ClientDAO.getInstance().add(c);
-
     }
+    
+    public void insertRoom(Room c) throws Exception{
+        HashMap<String, Room> rooms = Cinema.getInstance().getRooms();
+        for(HashMap.Entry<String, Room> user : rooms.entrySet()) {
+            Room u = rooms.get(user.getKey());
+            if(u.getId().equals(c.getId())) throw new IOException
+            ("Error: "+c.getId()+" ya está registrado.");
+        }
+        RoomDAO.getInstance().add(c.getId(), c);
+    }
+    
     public static Cinema getInstance() {
         if (instance == null) 
             instance = new Cinema();

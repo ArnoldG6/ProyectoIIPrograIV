@@ -15,6 +15,7 @@ public class RegistroApplication extends Application {
         classes.add(MultiPartFeature.class);
         classes.add(Login.class);  
         classes.add(Register.class);
+        //classes.add(RegisterRoom.class);
         return classes;
     }   
 }
