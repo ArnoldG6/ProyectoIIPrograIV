@@ -5,23 +5,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Book this movie</title>
-        <link rel="stylesheet" type="text/css" href="css/estilo.css">
-
+        <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">         
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>       
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> 
     </head>
-    <body>
-        <div>
+    <body class=" bg-dark text-white">
+        <div class="p-3 bg-dark mx-auto">
             <div>NGC Cinema</div>
         </div>
         <div class="movie-container">
-            <label style="font-size: 1em;">Pick a movie:</label>
+            <label style="font-size: 1em;">Seleccione una Película:</label>
             <select id="movie">
-                <option value="10">Jurassic Park ($10)</option>
-                <option value="12">Logan ($12)</option>
-                <option value="8">Avengers Infinity War ($8)</option>
+                <option value="10">Shrek Tico ($10)</option>
+                <option value="12">UXIONO ($12)</option>
+                <option value="8">Capitao Whatsapp ($8)</option>
             </select>
         </div>
 
@@ -32,11 +29,11 @@
             </li>
             <li>
                 <div id="seat" class="seat selected"></div>
-                <small class="status" style="font-size: 1em;">Selected</small>
+                <small class="status" style="font-size: 1em;">Seleccionado</small>
             </li>
             <li>
                 <div id="seat" class="seat occupied"></div>
-                <small class="status" style="font-size: 1em;">Occupied</small>
+                <small class="status" style="font-size: 1em;">Ocupado</small>
             </li>
         </ul>
 
@@ -106,11 +103,11 @@
         </div>
 
         <p class="text" style="font-size: 1em;margin:0px 0px 15px 0px">
-            You have selected <span id="count">0</span> seats for a price of $<span id="total">0</span>
+            Se han seleccionado <span id="count">0</span> butacas con total: $<span id="total">0</span>
         </p>
 
         <a href="./index.html">
-            <button class="btn-home">
+            <button class="btn btn-primary btn-lg btn-block">
                 Home
             </button>
         </a>

@@ -9,6 +9,9 @@ var menu=`
         <ul class="navbar-nav ml-auto" id="menuUl">
           <li class="nav-item">
             <a class="nav-link" href="index.html">Contact us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="booking.html">Book a Movie</a>
           </li>`;  
           
             let usuarioJson = sessionStorage.getItem('user');
