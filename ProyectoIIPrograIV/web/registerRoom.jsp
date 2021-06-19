@@ -12,7 +12,7 @@
         
         <title>Register Room</title>
     </head>
-    <body>
+    <body class=" bg-dark text-white">
         <h1 class = "text-center">Registrar una Sala</h1>
 
         <form class = "container center_div w-75 p-3" name = "regForm" action="/ProyectoIIPrograIV/registerRoom" method="POST">
