@@ -36,7 +36,7 @@ public class Cinema {
     public void insertClient(Client c) throws Exception{
         HashMap<String, User> users = Cinema.getInstance().getUsersMap();
         for(HashMap.Entry<String, User> user : users.entrySet()) {
-            User u = users.get(c.getId());
+            User u = users.get(user.getKey());
             if(u.getEmail().equals(c.getEmail())) throw new IOException
             ("Error: "+c.getEmail()+" ya está registrado.");
             if(u.getId().equals(c.getId())) throw new IOException

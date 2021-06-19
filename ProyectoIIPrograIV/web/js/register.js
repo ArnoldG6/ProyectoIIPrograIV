@@ -14,10 +14,11 @@ var url="http://localhost:8080/ExamenPrograIV/";
         (async ()=>{
             const response = await fetch(request);
             if (!response.ok) {errorMessage(response.status,$("#registerDialog #r_errorDiv"));return;}
-            usuario = await response.json();
+            //usuario = await response.json();
             //sessionStorage.setItem('user', JSON.stringify(((usuario))));
             $('#registerDialog').modal('hide');
             document.location = url;
+            
         })(); 
     }
 

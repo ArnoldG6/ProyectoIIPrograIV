@@ -11,10 +11,7 @@ package model;
  */
 public class Client extends User {
 
-    private int cardNumber;
-
     public Client(String username, String id, String email, String telNum, String pass) {
-        this.cardNumber = 0;
         this.name = username;
         this.id = id.toUpperCase();
         this.email = email;
@@ -38,11 +35,4 @@ public class Client extends User {
         this("", "", "", "", "");
     }
 
-    public int getCardNumber() {
-        return cardNumber;
-    }
-
-    public void setCardNumber(int cardNumber) {
-        this.cardNumber = cardNumber;
-    }
 }
