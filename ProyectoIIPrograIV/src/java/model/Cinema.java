@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import model.entities.AdministratorDAO;
 import model.entities.ClientDAO;
+import model.entities.RoomDAO;
+import model.entities.movieDAO;
 
 /**
  *
@@ -45,8 +47,28 @@ public class Cinema {
             ("Error: "+u.getTelNum()+" ya está registrado.");
         }
         ClientDAO.getInstance().add(c);
-
     }
+    
+    public void insertRoom(Room c) throws Exception{
+        HashMap<String, Room> rooms = Cinema.getInstance().getRooms();
+        for(HashMap.Entry<String, Room> user : rooms.entrySet()) {
+            Room u = rooms.get(user.getKey());
+            if(u.getId().equals(c.getId())) throw new IOException
+            ("Error: "+c.getId()+" ya está registrado.");
+        }
+        RoomDAO.getInstance().add(c.getId(), c);
+    }
+    
+    public void insertMovie(Movie m) throws Exception{
+        HashMap<String, Movie> movi = Cinema.getInstance().getMoviesMap();
+        for(HashMap.Entry<String, Movie> mo : movi.entrySet()) {
+            Movie u = movi.get(mo.getKey());
+            if(u.getId().equals(m.getId())) throw new IOException
+            ("Error: "+m.getId()+" ya está registrado.");
+        }
+        movieDAO.getInstance().add(m);
+    }
+    
     public static Cinema getInstance() {
         if (instance == null) instance = new Cinema();
         return instance;
@@ -77,6 +99,18 @@ public class Cinema {
             users.putAll(clients);
             System.out.println(users.toString());
             return users;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    
+    public HashMap<String, Movie> getMoviesMap() throws Exception {
+        updateModel();
+        HashMap<String, Movie> movi = new HashMap<>();
+        try {
+            movi.putAll(movies);
+            System.out.println(movi.toString());
+            return movi;
         } catch (Exception e) {
             throw e;
         }

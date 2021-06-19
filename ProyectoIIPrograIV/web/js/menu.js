@@ -18,8 +18,23 @@ var menu=`
             
             if (usuarioJson!==null){ 
                 let usuario= JSON.parse(usuarioJson);
-                if (['ADM','CLI'].includes(usuario.role)){
-                    menu+=`<li class='nav-item'> <a class='nav-link' href='listado.html'>Listado</a> </li>`;
+                if (['ADM'].includes(usuario.role)){
+                    menu+=`
+                        <li 
+                           class='nav-item'> <a class='nav-link' href='#' data-toggle='modal' data-target='#registerRoomDialog'>Register Room</a> 
+                        </li>
+                        <li 
+                           class='nav-item'> <a class='nav-link' href='#' data-toggle='modal' data-target='#registerMovieDialog'>Register Movie</a> 
+                        </li>
+                        <li 
+                           class='nav-item'> <a class='nav-link' href='#' data-toggle='modal' data-target='#Dialog'>Pragramar Proyecciones</a> 
+                        </li>
+                        <li 
+                           class='nav-item'> <a class='nav-link' href='#' data-toggle='modal' data-target='#Dialog'>Imprimir ticketes</a> 
+                        </li>`;
+                }
+                if (['CLI'].includes(usuario.role)){
+                    menu+=`<li class='nav-item'> <a class='nav-link' href='listado.html'>Ver compras</a> </li>`;
                 }
 
                 menu+=`
