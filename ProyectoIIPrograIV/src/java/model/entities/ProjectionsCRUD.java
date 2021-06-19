@@ -7,22 +7,22 @@ package model.entities;
 public class ProjectionsCRUD {
     
     protected static final String CMD_LIST
-            = "SELECT id, date, hour, room_id, Movie_id FROM Projections;";
+            = "SELECT id, date, hour, room_id, Movie_id FROM cinema.Projections;";
     protected static final String CMD_ADD
-            = "INSERT INTO Projections (id, date, hour, room_id, Movie_id) "
+            = "INSERT INTO cinema.Projections (id, date, hour, room_id, Movie_id) "
             + "VALUES (?, ?, ?, ?, ?); ";
     protected static final String CMD_RECOVER
-            = "SELECT id, date, hour, room_id, Movie_id FROM Projections "
+            = "SELECT id, date, hour, room_id, Movie_id FROM cinema.Projections "
             + "WHERE id = ?; ";
     protected static final String CMD_UPDATE_USERNAME
-            = "UPDATE Projections SET date = ?"
+            = "UPDATE cinema.Projections SET date = ?"
             + "WHERE id = ?; ";
     protected static final String CMD_UPDATE_ADMIN_ID
-            = "UPDATE Projections SET id = ?"
+            = "UPDATE cinema.Projections SET id = ?"
             + "WHERE date = ?; ";
     protected static final String CMD_DELETE
-            = "DELETE FROM Projections "
+            = "DELETE FROM cinema.Projections "
             + "WHERE id = ?; ";
     protected static final String CMD_COUNT
-            = "SELECT COUNT(*) AS total_Projectionss FROM Projections;";
+            = "SELECT COUNT(*) AS total_Projectionss FROM cinema.Projections;";
 }
