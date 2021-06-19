@@ -22,13 +22,15 @@ public class RegisterMovie {
     @Produces(MediaType.APPLICATION_JSON)    
     public void register(Movie movie) {  
             try {
+                final String status = "NO";
                 if(movie == null) throw new Exception("Pelicula no creada");
-                Movie cli = new Movie(movie.getId(), movie.getName(), 
-                        movie.getDescription(), movie.getPublicationYear(), movie.getDirector());
-                if(cli == null) throw new Exception("Usuario no creado");
-                Cinema.getInstance().insertMovie(cli);
+                Movie mov = new Movie(movie.getId(), movie.getName(), 
+                        movie.getDescription(), movie.getPublicationYear(), movie.getDirector(),status, 
+                        movie.getImgLink());
+                if(mov == null) throw new Exception("Usuario no creado");
+                Cinema.getInstance().insertMovie(mov);
                 System.out.println(movie);
-                System.out.println(cli);
+                System.out.println(mov);
             } catch (Exception ex) {
                 System.out.println(ex);
                 throw new NotFoundException();

@@ -9,9 +9,6 @@ var menu=`
         <ul class="navbar-nav ml-auto" id="menuUl">
           <li class="nav-item">
             <a class="nav-link" href="index.html">Contact us</a>
-          </li>
-          <li class='nav-item'>
-                <a class='nav-link' href='#' data-toggle='modal' data-target='#registerDialog'>Register</a>
           </li>`;  
           
             let usuarioJson = sessionStorage.getItem('user');
@@ -46,12 +43,16 @@ var menu=`
                       <div class='dropdown-menu'>
                         <a class='dropdown-item' id='logout'>Salir</a>
                       </div>
-                    </li>`;                
+                    </li>
+                    `;                
             }
             else{
               menu+=`
                 <li class='nav-item'>
                     <a class='nav-link' href='#' data-toggle='modal' data-target='#loginDialog'>Login</a>
+                </li>
+                <li class='nav-item'>
+                    <a class='nav-link' href='#' data-toggle='modal' data-target='#registerDialog'>Register</a>
                 </li>`;           
             }
             menu+=`

@@ -7,7 +7,8 @@ var url="http://localhost:8080/ExamenPrograIV/";
             name: $("#m_name").val(),
             description: $("#m_desc").val(),
             publicationYear: $("#m_year").val(),
-            director: $("#m_dir").val()
+            director: $("#m_dir").val(),
+            imgLink: $("#m_img_link").val()
         };       
         console.log(movie);
         let request = new Request(url+'api/registerMovie', {method: 'POST', headers: { 'Content-Type': 'application/json'},body: JSON.stringify((movie))});

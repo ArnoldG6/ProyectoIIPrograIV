@@ -5,29 +5,25 @@
  */
 package model.entities;
 
-/**
- *
- * @author victo
- */
 public class movieCRUD {
 
     protected static final String CMD_LIST
-            = "SELECT id, name, description, publicationYear, director FROM movie;";
+            = "SELECT id, description, publicationYear, director, inBillboard, name, imgLink FROM cinema.movie;";
     protected static final String CMD_ADD
-            = "INSERT INTO movie (id, name, description, publicationYear, director) "
-            + "VALUES (?, ?, ?, ?, ?); ";
+            = "INSERT INTO cinema.movie (id, description, publicationYear, director, inBillboard, name,imgLink) "
+            + "VALUES (?, ?, ?, ?, ?,?,?); ";
     protected static final String CMD_RECOVER
-            = "SELECT id, name, description, publicationYear, director FROM movie "
+            = "SELECT id, description, publicationYear, director, inBillboard, name, imgLink FROM cinema.movie "
             + "WHERE id = ?; ";
     protected static final String CMD_UPDATE_USERNAME
-            = "UPDATE movie SET name = ?"
+            = "UPDATE cinema.movie SET name = ?"
             + "WHERE id = ?; ";
     protected static final String CMD_UPDATE_ADMIN_ID
-            = "UPDATE movie SET name = ?"
+            = "UPDATE cinema.movie SET name = ?"
             + "WHERE id = ?; ";
     protected static final String CMD_DELETE
-            = "DELETE FROM movie "
+            = "DELETE FROM cinema.movie "
             + "WHERE id = ?; ";
     protected static final String CMD_COUNT
-            = "SELECT COUNT(*) AS total_movies FROM movie;";
+            = "SELECT COUNT(*) AS total_movies FROM cinema.movie;";
 }

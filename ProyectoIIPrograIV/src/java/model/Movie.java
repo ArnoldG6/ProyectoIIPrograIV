@@ -8,24 +8,37 @@ import java.util.HashMap;
  */
 public class Movie {
 
-    private String id;
-    private String name;
-    private String description;
-    private String publicationYear;
-    private String director;
-    private HashMap<String, Projections> projections;
+    String id;
+    String name;
+    String description;
+    String publicationYear;
+    String director;
+    String inBillboard;
+    String imgLink;
+    HashMap<String, Projections> projections;
 
-    public Movie(String _id, String _name, String _desc, String _publicY, String direct) {
+    public Movie(String _id, String _name, String _desc, String _publicY, String direct,
+            String inBillboard, String imgLink) {
         this.id = _id;
         this.name = _name;
         this.description = _desc;
         this.publicationYear = _publicY;
         this.director = direct;
+        this.inBillboard = inBillboard; //CARTELERA 
         this.projections=new HashMap<>();
+        this.imgLink = imgLink;
     }
 
     public Movie() {
-        this("", "", "", "", "");
+        this("", "", "", "", "","","");
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -60,12 +73,20 @@ public class Movie {
         this.director = director;
     }
 
-    public String getId() {
-        return id;
+    public String getInBillboard() {
+        return inBillboard;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setInBillboard(String inBillboard) {
+        this.inBillboard = inBillboard;
+    }
+
+    public String getImgLink() {
+        return imgLink;
+    }
+
+    public void setImgLink(String imgLink) {
+        this.imgLink = imgLink;
     }
 
     public HashMap<String, Projections> getProjections() {
