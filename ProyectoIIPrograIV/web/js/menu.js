@@ -23,6 +23,10 @@ var menu=`
                         <li 
                            class='nav-item'> <a class='nav-link' href='#' data-toggle='modal' data-target='#registerRoomDialog'>Register Room</a> 
                         </li>`;
+                    menu+=`
+                        <li 
+                           class='nav-item'> <a class='nav-link' href='#' data-toggle='modal' data-target='#registerMovieDialog'>Register Movie</a> 
+                        </li>`;
                 }
                 if (['ADM','CLI'].includes(usuario.role)){
                     menu+=`<li class='nav-item'> <a class='nav-link' href='listado.html'>Listado</a> </li>`;
