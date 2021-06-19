@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,11 +16,11 @@
     <body class=" bg-dark text-white">
         <h1 class = "text-center">Registrar una Sala</h1>
 
-        <form class = "container center_div w-75 p-3" name = "regForm" action="/ProyectoIIPrograIV/registerRoom" method="POST">
+        <form class = "container center_div w-75 p-3" name = "regForm" action="/ExamenPrograIV/registerRoom?=room_id" method="POST">
             <div class = "form-group">
                 <label for = "regId">Número de identificación</label>
                 <input type="text" class ="form-control  text-center" name = "room_id" placeholder = "Número de Sala" id = "room_id">
-                <div class="text-center">
+                <div class="text-center"> 
                 <div>&nbsp;</div>
                 <div>&nbsp;</div>
                 <button class ="btn btn-outline-light form-control w-50">Completar registro</button>

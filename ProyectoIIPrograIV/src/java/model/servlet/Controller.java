@@ -21,17 +21,17 @@ public class Controller extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         try {
-            String viewURL = "index.html";
+            String viewURL = "/index.html";
             switch (request.getServletPath()) {
                 case "/registerRoom":
                     viewURL = this.registerRoom(request, response);
                     break;
                 default:
-                    viewURL = "index.jsp";
+                    viewURL = "/index.html";
             }
             request.getRequestDispatcher(viewURL).forward(request, response);
         } catch (Exception e) {
-            request.getRequestDispatcher("index.html").forward(request, response);
+            request.getRequestDispatcher("/index.html").forward(request, response);
         }
     }
 
@@ -44,9 +44,8 @@ public class Controller extends HttpServlet {
                         + "de los campos debe estar vacios.");
             }
             Cinema.getInstance().insertRoom(new Room(id));
-            request.getRequestDispatcher("/registerRoom.jsp").forward(request, response);
         } catch (Exception e) {
-            request.getRequestDispatcher("index.html").forward(request, response);
+            request.getRequestDispatcher("/index.html").forward(request, response);
             throw e;
         }
         return "/index.html";
