@@ -13,39 +13,19 @@
         <title>Register Room</title>
     </head>
     <body>
-        <!-- REGISTER ROOM -->
-        <div class="row">              
-            <div class="modal fade" id="registerRoomDialog" tabindex="-1" role="dialog">
-                <div class="modal-dialog" style="width: 400px">
-                    <div class="modal-content">
-                        <div class="modal-header" >
-                            <div class="d-flex justify-content-center" style="width: 90%">  <img class="img-circle" id="img_logo" src="images/user.png" style="max-width: 50px; max-height: 50px"> </div>
-                            <div> <button type="button" class="close" data-dismiss="modal"> <span aria-hidden="true">&times;</span> </button> </div>
-                        </div>
-                        <form id="registerRoomForm">
-                            <div class="modal-body">
-                                <div id="div-login-msg">
-                                    <div id="icon-login-msg" ></div>
-                                    <span>Registro de Salas</span>
-                                </div>
-                                <br>
-                                <div class="input-group" style="margin-bottom: 25px">
-                                    <div class="input-group-prepend "><span class="input-group-text"><i class="fa fa-user bigicon"></i></span></div>
-                                    <input class="form-control" placeholder="Numero de Sala" type="text" id="room_id" name="room_id" value="" required>
-                                    <div class="invalid-feedback">Ingrese el numero de la Sala</div>
-                                </div>                    
-                            </div>
-                            <div class="modal-footer d-flex justify-content-center">
-                                <div>
-                                    <button type="button" id="registerRoom" class="btn btn-primary btn-lg btn-block">Registrar Sala</button>
-                                </div>
-                            </div>
-                            <div id="r_errorDiv" style="width:80%; margin: auto;"></div>     
-                        </form>
-                    </div>
+        <h1 class = "text-center">Registrar una Sala</h1>
+
+        <form class = "container center_div w-75 p-3" name = "regForm" action="/ProyectoIIPrograIV/registerRoom" method="POST">
+            <div class = "form-group">
+                <label for = "regId">Número de identificación</label>
+                <input type="text" class ="form-control  text-center" name = "room_id" placeholder = "Número de Sala" id = "room_id">
+                <div class="text-center">
+                <div>&nbsp;</div>
+                <div>&nbsp;</div>
+                <button class ="btn btn-outline-light form-control w-50">Completar registro</button>
                 </div>
             </div>
-        </div>
+        </form> 
 
     </body>
 </html>
