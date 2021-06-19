@@ -10,7 +10,7 @@
       }
 
       body {
-        background-color: #000000;
+        background-color: #343a40;
         color: #fff;
         display: flex;
         flex-direction: column;
@@ -43,7 +43,7 @@
       }
 
       .seat {
-        background-color: #444451;
+        background-color: #000;
         height: 12px;
         width: 15px;
         margin: 3px;
