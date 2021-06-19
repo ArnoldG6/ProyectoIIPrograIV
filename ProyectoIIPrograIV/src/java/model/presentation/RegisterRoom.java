@@ -26,12 +26,13 @@ public class RegisterRoom {
     @Produces(MediaType.APPLICATION_JSON)    
     public void register(Room room) {  
             try {
+                System.out.println(room.getId());
                 if(room == null) throw new Exception("Sala no creada");
                 Room room2 = new Room(room.getId());
-                if(room2 == null) throw new Exception("Sala no creada");
+                if(room2 == null) throw new Exception("Sala 2 no creada");
                 Cinema.getInstance().insertRoom(room2);
-                System.out.println(room);
-                System.out.println(room2);
+                System.out.println(room.getId());
+                System.out.println(room2.getId());
             } catch (Exception ex) {
                 System.out.println(ex);
                 throw new NotFoundException();

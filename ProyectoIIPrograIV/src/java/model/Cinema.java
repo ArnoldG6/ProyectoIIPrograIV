@@ -34,6 +34,7 @@ public class Cinema {
     public final void updateModel() throws Exception {
         Cinema.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
         Cinema.getInstance().setClient(ClientDAO.getInstance().listAll());
+        Cinema.getInstance().setMovies(movieDAO.getInstance().listAll());
     }
     public void insertClient(Client c) throws Exception{
         HashMap<String, User> users = Cinema.getInstance().getUsersMap();
@@ -50,12 +51,14 @@ public class Cinema {
     }
     
     public void insertRoom(Room c) throws Exception{
+        updateModel();
         Room room = Cinema.getInstance().getRooms().get(c.getId());
         if(room == null) RoomDAO.getInstance().add(c.getId(), c);
         else throw new Exception("La sala "+c.getId()+" ya está registrada." );
     }
     
     public void insertMovie(Movie m) throws Exception{
+        updateModel();
         HashMap<String, Movie> movi = Cinema.getInstance().getMoviesMap();
         for(HashMap.Entry<String, Movie> mo : movi.entrySet()) {
             Movie u = movi.get(mo.getKey());

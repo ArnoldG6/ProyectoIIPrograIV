@@ -17,7 +17,7 @@ public class Room {
     }
     
     public Room(){
-        this("");
+        this("wea");
     }
 
     public String getId() {
@@ -28,11 +28,11 @@ public class Room {
         this.id = id;
     }
 
-    public HashMap<String, ticketOffice> getTicketOffice() {
+    public HashMap<String, ticketOffice> getTicketOffices() {
         return ticketOffices;
     }
 
-    public void setTicketOffice(HashMap<String, ticketOffice> ticketOffice) {
+    public void setTicketOffices(HashMap<String, ticketOffice> ticketOffice) {
         this.ticketOffices = ticketOffice;
     }
 

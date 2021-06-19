@@ -1,17 +1,20 @@
 var url="http://localhost:8080/ExamenPrograIV/";
-
+                                
     function registerRoom(){
         if (!valRoomRegister()) return;
-        room = {
-            id: $("#room_id").val()
-        };       
+        room = {id: $("#room_id").val()};       
         console.log(room);
-        let request = new Request(url+'api/registerRoom', {method: 'POST', headers: { 'Content-Type': 'application/json'},body: JSON.stringify((room))});
+        let request = new Request(url+'api/registerRoom', {method: 'POST', headers: { 'Content-Type': 'application/json'},body: JSON.stringify(room)});
         (async ()=>{
+            console.log("wea 1");
             const response = await fetch(request);
+            console.log("wea 2");
             if (!response.ok) {errorMessage(response.status,$("#registerRoomDialog #r_errorDiv"));return;}
+            console.log("wea 3");
             $('#registerRoomDialog').modal('hide');
+            console.log("wea 4");
             document.location = url;
+            console.log("wea 5");
             
         })(); 
     }
