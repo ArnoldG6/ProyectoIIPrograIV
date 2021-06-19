@@ -48,9 +48,7 @@ public class Cinema {
 
     }
     public static Cinema getInstance() {
-        if (instance == null) 
-            instance = new Cinema();
-        
+        if (instance == null) instance = new Cinema();
         return instance;
     }
 
