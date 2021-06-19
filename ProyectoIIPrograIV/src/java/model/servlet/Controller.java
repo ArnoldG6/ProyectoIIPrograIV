@@ -24,7 +24,7 @@ public class Controller extends HttpServlet {
             String viewURL = "index.html";
             switch (request.getServletPath()) {
                 case "/registerRoom":
-                    viewURL = this.registerTeacher(request, response);
+                    viewURL = this.registerRoom(request, response);
                     break;
                 default:
                     viewURL = "index.jsp";
@@ -35,7 +35,7 @@ public class Controller extends HttpServlet {
         }
     }
 
-    public String registerTeacher(HttpServletRequest request, HttpServletResponse response)
+    public String registerRoom(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         try {
             String id = request.getParameter("room_id");

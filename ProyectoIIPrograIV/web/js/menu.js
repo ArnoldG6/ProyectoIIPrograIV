@@ -22,7 +22,7 @@ var menu=`
                     if(usuario.role == 'ADM'){
                         menu+=`
                         <li 
-                           class='nav-item'> <a class='nav-link' href='registerRoom.jsp'>Register Room</a> 
+                           class='nav-item'> <a class='nav-link' href='/ExamenPrograIV/registerRoom.jsp'>Register Room</a> 
                         </li>
                         <li 
                            class='nav-item'> <a class='nav-link' href='#' data-toggle='modal' data-target='#registerMovieDialog'>Register Movie</a> 
