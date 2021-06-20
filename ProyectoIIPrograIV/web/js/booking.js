@@ -170,6 +170,14 @@ acquista.addEventListener("click", () => {
 
 function subStringAsientos(){
     
+    var cadena = $("#asientostotales").val(),
+    separador = " -",
+    asientos = cadena.split(separador);
+    
+    for (var i=0; i < asientos.length; i++) {
+      purchase(asientos[i]);
+   }
+    
 }
 
 var url="http://localhost:8080/ExamenPrograIV/";
