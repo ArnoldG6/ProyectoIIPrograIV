@@ -48,7 +48,7 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
                     ResultSet rs = stm.executeQuery(TicketOfficeCRUD.CMD_LIST)) {
                 while (rs.next()) {
                     username = rs.getString("id");
-                    u.put(username, (new ticketOffice(username, rs.getInt("occupied"), Double.parseDouble(rs.getString("total")))));
+                    u.put(username, (new ticketOffice(username, rs.getString("idClient"),rs.getInt("occupied"), Double.parseDouble(rs.getString("total")))));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(TicketOfficeDAO.class.getName()).log(Level.SEVERE, null, ex);
