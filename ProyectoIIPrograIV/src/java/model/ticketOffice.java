@@ -7,6 +7,7 @@ package model;
 public class ticketOffice {
 
     private String id;
+    private String idClient;
     private int occupied;
     private double total;
 

@@ -106,7 +106,7 @@
       <br>
       <div class="checkoutTotal">
         <span> Asientos: </span> <span class="sedieTotale"> 0 </span>
-        <span> Total: </span> <span class="costo"> 0 </span>
+        <span> Total: </span> <span class="costo" id="costototal"> 0 </span>
       </div>
 
       <br>
@@ -123,6 +123,10 @@
 
         <button type="submit" class="btnAcquista">Comprar</button>
         <!-- <button onclick="createPDF()" id="button">Generar PDF</button> -->
+        
+        <div class="input-group-prepend "><span class="input-group-text"><i class="fa fa-user bigicon"></i></span></div>
+            <input class="form-control" placeholder="Tarjeta de credito o debito" type="text" id="tarjeta" name="tarjeta" value="" required>
+        <div class="invalid-feedback">Ingrese la tarjeta</div>
         
       </form>
 

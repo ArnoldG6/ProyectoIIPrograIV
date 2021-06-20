@@ -167,12 +167,19 @@ acquista.addEventListener("click", () => {
   });  
 });
 
+
+function subStringAsientos(){
+    
+}
+
 var url="http://localhost:8080/ExamenPrograIV/";
 
-    function purchase(){
+    function purchase(Asiento){
         if (!valPurchase()) return;
         ticketOffice = {
-            id: $("#Asietnos").val()
+            id: Asiento,
+            occupied: 0,
+            total: $("#costototal").val()
         };       
         console.log(ticketOffice);
         let request = new Request(url+'api/purchase', {method: 'POST', headers: { 'Content-Type': 'application/json'},body: JSON.stringify((ticketOffice))});
@@ -210,6 +217,7 @@ var url="http://localhost:8080/ExamenPrograIV/";
             $('body').append(content); 
             $("#purchase").click(purchase);                         
         })();
+        
         var doc = new jsPDF();
         
         doc.text(10,10,"Hola");
