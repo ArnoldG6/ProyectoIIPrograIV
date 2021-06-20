@@ -13,13 +13,21 @@ public class ticketOffice {
     public ticketOffice(String _id, int occup) {
         this.id = _id;
         this.occupied = occup;
+        this.total = 0.0;
+    }
+    
+    public ticketOffice(String _id, int occup, double to) {
+        this.id = _id;
+        this.occupied = occup;
+        this.total = to;
     }
 
     public ticketOffice(String _id) {
         this.id = _id;
         this.occupied = 1;
+        this.total = 0.0;
     }
-    
+
     public ticketOffice() {
         this("", 0);
     }

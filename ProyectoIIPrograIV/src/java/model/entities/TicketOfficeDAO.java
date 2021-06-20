@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Administrator;
 import model.ticketOffice;
 
 /**
@@ -49,7 +48,7 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
                     ResultSet rs = stm.executeQuery(TicketOfficeCRUD.CMD_LIST)) {
                 while (rs.next()) {
                     username = rs.getString("id");
-                    u.put(username, (new ticketOffice(username, rs.getInt("occupied"))));
+                    u.put(username, (new ticketOffice(username, rs.getInt("occupied"), Double.parseDouble(rs.getString("total")))));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(TicketOfficeDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,6 +73,7 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
             stm.clearParameters();
             stm.setString(1, value.getId());
             stm.setInt(2, value.getOccupied());
+            stm.setString(3, String.valueOf(value.getTotal()));
             if (stm.executeUpdate() != 1) {
                 throw new IllegalArgumentException(
                         String.format("It couldn't add the register: '%s'", id));

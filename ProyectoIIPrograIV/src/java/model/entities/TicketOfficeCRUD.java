@@ -7,12 +7,12 @@ package model.entities;
 public class TicketOfficeCRUD {
     
     protected static final String CMD_LIST
-            = "SELECT id, occupied, room_id FROM cinema.ticketOffice;";
+            = "SELECT id, occupied, total, room_id FROM cinema.ticketOffice;";
     protected static final String CMD_ADD
-            = "INSERT INTO cinema.ticketOffice (id, occupied, room_id) "
-            + "VALUES (?, ?, ?); ";
+            = "INSERT INTO cinema.ticketOffice (id, occupied, total, room_id) "
+            + "VALUES (?, ?, ?, ?); ";
     protected static final String CMD_RECOVER
-            = "SELECT id, occupied, room_id FROM cinema.ticketOffice "
+            = "SELECT id, occupied, total, room_id FROM cinema.ticketOffice "
             + "WHERE id = ?; ";
     protected static final String CMD_UPDATE_USERNAME
             = "UPDATE cinema.ticketOffice SET occupied = ?"
