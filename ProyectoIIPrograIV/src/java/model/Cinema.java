@@ -5,6 +5,7 @@ import java.util.HashMap;
 import model.entities.AdministratorDAO;
 import model.entities.ClientDAO;
 import model.entities.RoomDAO;
+import model.entities.TicketOfficeDAO;
 import model.entities.movieDAO;
 
 /**
@@ -129,6 +130,16 @@ public class Cinema {
         try {
             Client cl = new Client(nom, id, em, cllph, pass);
             ClientDAO.getInstance().add(cl.getId(), cl);
+        } catch (Exception e) {
+            //throw new IOException("Este ID ya está registrado");
+            throw e;
+        }
+    }
+    
+    public void insertTicketOffice(String id) throws Exception {
+        try {
+            ticketOffice t1 = new ticketOffice(id);
+            TicketOfficeDAO.getInstance().add(t1.getId(),t1);
         } catch (Exception e) {
             //throw new IOException("Este ID ya está registrado");
             throw e;

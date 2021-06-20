@@ -163,6 +163,18 @@ acquista.addEventListener("click", () => {
 
     // Save
     localStorage.setItem("occupate", JSON.stringify(localStorageSeatsOccupied));
-  });
+  });  
 });
 
+/*function createPDF(){
+    if(document.getElementById("costo1").value === ""){
+        alert("Necio bro");
+    }
+    else{
+        var doc = new jsPDF();
+        
+        doc.text(10,10,document.getElementById("costo1").value);
+        
+        doc.save("output.pdf");
+    }
+}*/

@@ -17,6 +17,7 @@ public class RegistroApplication extends Application {
         classes.add(Register.class);
         classes.add(RegisterMovie.class);
         classes.add(MovieLoader.class);
+        classes.add(Purchase.class);
         return classes;
     }   
 }
