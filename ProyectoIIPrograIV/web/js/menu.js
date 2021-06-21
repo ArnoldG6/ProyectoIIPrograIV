@@ -9,9 +9,6 @@ var menu=`
         <ul class="navbar-nav ml-auto" id="menuUl">
           <li class="nav-item">
             <a class="nav-link" href="index.html">Contact us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="booking.html">Book a Movie</a>
           </li>`;  
           
             let usuarioJson = sessionStorage.getItem('user');
@@ -19,6 +16,10 @@ var menu=`
             if (usuarioJson!==null){ 
                 let usuario= JSON.parse(usuarioJson);
                 if (['ADM', 'CLI'].includes(usuario.role)){
+                    menu+=` 
+                        <li class="nav-item">
+                            <a class="nav-link" href="href="booking.jsp">Book a Movie</a>
+                        </li>`;
                     if(usuario.role == 'ADM'){
                         menu+=`
                         <li 
@@ -56,6 +57,9 @@ var menu=`
                 </li>
                 <li class='nav-item'>
                     <a class='nav-link' href='#' data-toggle='modal' data-target='#registerDialog'>Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="booking.jsp">Book a Movie</a>
                 </li>`;           
             }
             menu+=`
