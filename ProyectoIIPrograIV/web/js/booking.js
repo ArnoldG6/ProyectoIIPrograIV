@@ -169,10 +169,19 @@ acquista.addEventListener("click", () => {
     });
 });
 
+let usuarioJson = sessionStorage.getItem('user');
+const usuariofinal="";
+if(usuarioJson!==null){
+    let usuario= JSON.parse(usuarioJson);
+    usuariofinal=usuario.id;
+}
+else{
+    usuariofinal="";
+}
 
 function subStringAsientos() {
 
-    var cadena = $("#asientostotales").val(),
+    var cadena = postoS.innerHTML,
             separador = " -",
             asientos = cadena.split(separador);
     console.log(asientos);
@@ -189,11 +198,13 @@ var url = "http://localhost:8080/ExamenPrograIV/";
 function purchase(Asiento) {
     if (!valPurchase())
         return;
-    ticketOffice = {
-        id: Asiento,
-        occupied: 1,
-        total: $("#costototal").val()
-    };
+    if (!valPurchase()) return;
+        ticketOffice = {
+            id: Asiento,
+            idClient: usuariofinal,
+            occupied: 1,
+            total: $("#costototal").val()
+        };
     console.log("Este es el ticketOffice" + ticketOffice);
     let request = new Request(url + 'api/purchase', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify((ticketOffice))});
     (async () => {
