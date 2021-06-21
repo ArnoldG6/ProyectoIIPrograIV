@@ -189,7 +189,7 @@ var url="http://localhost:8080/ExamenPrograIV/";
             occupied: 1,
             total: $("#costototal").val()
         };       
-        console.log(ticketOffice);
+        console.log("Este es el ticketOffice" + ticketOffice);
         let request = new Request(url+'api/purchase', {method: 'POST', headers: { 'Content-Type': 'application/json'},body: JSON.stringify((ticketOffice))});
         (async ()=>{
             const response = await fetch(request);
