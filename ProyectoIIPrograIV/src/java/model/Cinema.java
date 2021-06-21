@@ -36,6 +36,7 @@ public class Cinema {
         Cinema.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
         Cinema.getInstance().setClient(ClientDAO.getInstance().listAll());
         Cinema.getInstance().setMovies(movieDAO.getInstance().listAll());
+        System.out.println(movies.toString());
     }
     public void insertClient(Client c) throws Exception{
         HashMap<String, User> users = Cinema.getInstance().getUsersMap();

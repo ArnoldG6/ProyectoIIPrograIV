@@ -21,7 +21,7 @@ public class MovieLoader {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)    
-    public HashMap<String, Movie> login() {   
+    public HashMap<String, Movie> loadMovies() {   
             try {
                 HashMap<String, Movie> billboards = Cinema.getInstance().getBilldBoards();
                 request.getSession(true).setAttribute("billboards", billboards);
