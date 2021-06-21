@@ -102,10 +102,10 @@
   <div class="checkout">
     <div class="checkOutAreaOne">
       <span> Puesto (Asiento/Fila):</span>
-      <div class="postoS"></div>
+      <div class="postoS"  id="asientostotales"></div>
       <br>
       <div class="checkoutTotal">
-        <span> Asientos: </span> <span class="sedieTotale" id="asientostotales"> 0 </span>
+        <span> Asientos: </span> <span class="sedieTotale"> 0 </span>
         <span> Total: </span> <span class="costo" id="costototal"> 0 </span>
       </div>
 
@@ -117,7 +117,7 @@
       <form action="#" method="POST" id="purchaseForm2">
         <script>
           // Hide default stripe button
-          //document.getElementsByClassName('stripe-button-el')[0].style.display = 'none';
+          document.getElementsByClassName('stripe-button-el')[0].style.display = 'none';
         </script>
 
 

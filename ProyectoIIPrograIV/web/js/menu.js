@@ -18,7 +18,7 @@ var menu=`
                 if (['ADM', 'CLI'].includes(usuario.role)){
                     menu+=` 
                         <li class="nav-item">
-                            <a class="nav-link" href="href="booking.jsp">Book a Movie</a>
+                            <a class="nav-link" href="/ExamenPrograIV/booking.html">Book a Movie</a>
                         </li>`;
                     if(usuario.role == 'ADM'){
                         menu+=`
@@ -59,7 +59,7 @@ var menu=`
                     <a class='nav-link' href='#' data-toggle='modal' data-target='#registerDialog'>Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="booking.jsp">Book a Movie</a>
+                    <a class="nav-link" href="/ExamenPrograIV/booking.html">Book a Movie</a>
                 </li>`;           
             }
             menu+=`
