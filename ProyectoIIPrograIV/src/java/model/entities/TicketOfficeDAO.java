@@ -72,8 +72,9 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
                 PreparedStatement stm = cnx.prepareStatement(TicketOfficeCRUD.CMD_ADD)) {
             stm.clearParameters();
             stm.setString(1, value.getId());
-            stm.setInt(2, value.getOccupied());
-            stm.setString(3, String.valueOf(value.getTotal()));
+            stm.setString(2, value.getIdClient());
+            stm.setInt(3, value.getOccupied());
+            stm.setString(4, String.valueOf(value.getTotal()));
             if (stm.executeUpdate() != 1) {
                 throw new IllegalArgumentException(
                         String.format("It couldn't add the register: '%s'", id));

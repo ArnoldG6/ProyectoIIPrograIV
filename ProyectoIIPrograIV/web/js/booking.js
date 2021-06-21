@@ -173,7 +173,7 @@ function subStringAsientos(){
     var cadena = $("#asientostotales").val(),
     separador = " -",
     asientos = cadena.split(separador);
-    
+
     for (var i=0; i < asientos.length; i++) {
       purchase(asientos[i]);
    }
@@ -186,23 +186,27 @@ var url="http://localhost:8080/ExamenPrograIV/";
         if (!valPurchase()) return;
         ticketOffice = {
             id: Asiento,
-            occupied: 0,
+            occupied: 1,
             total: $("#costototal").val()
         };       
         console.log(ticketOffice);
         let request = new Request(url+'api/purchase', {method: 'POST', headers: { 'Content-Type': 'application/json'},body: JSON.stringify((ticketOffice))});
         (async ()=>{
             const response = await fetch(request);
-            if (!response.ok) {errorMessage(response.status,$("#purchaseDialog #r_errorDiv"));return;}
-            $('#purchaseDialog').modal('hide');
+            //$('#purchaseDialog').modal('hide');
             document.location = url;
             
-        })(); 
+        })();
+        var doc = new jsPDF();
+        
+        doc.text(10,10,"Hola");
+
+        doc.save("Compra.pdf");
     }
 
     function valPurchase(){
-        $("#purchaseForm").addClass("was-validated");
-        return $("#purchaseForm").get(0).checkValidity(); 
+        $("#purchaseForm2").addClass("was-validated");
+        return $("#purchaseForm2").get(0).checkValidity(); 
     }
   function errorMessage(status,place){  
         switch(status){
@@ -217,20 +221,14 @@ var url="http://localhost:8080/ExamenPrograIV/";
     }  
   
   function loadPurchase(){
-        let request = new Request(url+'index.html', {method: 'GET'});
+        let request = new Request(url+'booking.html', {method: 'GET'});
         (async ()=>{
             const response = await fetch(request);
-            if (!response.ok) {errorMessage(response.status,$("#purchaseDialog #r_errorDiv"));return;}
             content = await response.text();
             $('body').append(content); 
-            $("#purchase").click(purchase);                         
+            $("#purchase2").click(purchase);                         
         })();
         
-        var doc = new jsPDF();
-        
-        doc.text(10,10,"Hola");
-
-        doc.save("Compra.pdf");
   }
   
   $(loadPurchase);
