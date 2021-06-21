@@ -156,14 +156,14 @@ acquista.addEventListener("click", () => {
     localStorage.clear();
 
     // Save inside local Storage
-    let seatBusySelec = document.querySelectorAll(".row .sedia.occupata");
+    //let seatBusySelec = document.querySelectorAll(".row .sedia.occupata");
 
     const localStorageSeatsOccupied = [...seatBusySelec].map(seat => {
       return [...sedieNotSelected].indexOf(seat);
     });
 
     // Save
-    localStorage.setItem("occupate", JSON.stringify(localStorageSeatsOccupied));
+    //localStorage.setItem("occupate", JSON.stringify(localStorageSeatsOccupied));
   });  
 });
 
@@ -232,3 +232,38 @@ var url="http://localhost:8080/ExamenPrograIV/";
   }
   
   $(loadPurchase);
+  
+  var csm=`
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#csm" >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="csm">
+        <ul class="navbar-nav ml-auto" id="csmUl">`;  
+          
+            let usuarioJson = sessionStorage.getItem('user');
+            
+            if (usuarioJson!==null){ 
+                let usuario= JSON.parse(usuarioJson);
+                if (['ADM', 'CLI'].includes(usuario.role)){
+                }
+                csm+=`
+                        <div class="input-group-prepend "><span class="input-group-text"><i class="fa fa-user bigicon"></i></span></div>
+                            <input class="form-control" placeholder="Digite su nombre" type="text" id="NombreU" name="NombreU" value="" required>
+                        <div class="invalid-feedback">Ingrese el nombre</div>
+                        `; 
+            }
+            else{          
+            }
+            csm+=`
+        </ul>
+      </div>
+    </div>
+  </nav>`;
+  
+  function loadBookingA(){
+    $('body').prepend(csm); 
+  }
+  
+  $(loadBookingA);  
