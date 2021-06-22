@@ -35,7 +35,7 @@ var menu=`
                         </li>`;
                     }
                     if(usuario.role == 'CLI'){
-                        menu+=`<li class='nav-item'> <a class='nav-link' href='listado.html'>Ver compras</a> </li>`;
+                        menu+=`<li class='nav-item'> <a class='nav-link' href='/ExamenPrograIV/seePurchases'>Ver compras</a> </li>`;
                     }
                     
                 }
