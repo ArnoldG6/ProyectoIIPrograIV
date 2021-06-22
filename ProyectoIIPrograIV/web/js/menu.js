@@ -29,10 +29,10 @@ var menu=`
                            class='nav-item'> <a class='nav-link' href='#' data-toggle='modal' data-target='#registerMovieDialog'>Register Movie</a> 
                         </li>
                         <li 
-                           class='nav-item'> <a class='nav-link' href='#' data-toggle='modal' data-target='#Dialog'>Pragramar Proyecciones</a> 
+                           class='nav-item'> <a class='nav-link' href='#' data-toggle='modal' data-target='#Dialog'>Schedule Projections</a> 
                         </li>
                         <li 
-                           class='nav-item'> <a class='nav-link' href='#' data-toggle='modal' data-target='#Dialog'>Imprimir ticketes</a> 
+                           class='nav-item'> <a class='nav-link' href='#' data-toggle='modal' data-target='#Dialog'>Print Tickets</a> 
                         </li>`;
                     }
                     if(usuario.role == 'CLI'){
