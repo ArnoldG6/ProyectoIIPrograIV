@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>       
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        
+        <link rel="icon" href="/ExamenPrograIV/images/landing-page.png" >
         <title>Register Room</title>
     </head>
     <body class=" bg-dark text-white">

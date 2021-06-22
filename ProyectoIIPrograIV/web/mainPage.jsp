@@ -12,7 +12,7 @@
         <script src="js/menu.js"></script>
         <script src="js/login.js"></script>
         <script src="js/booking.js"></script>
-        <link rel="icon" href="data:;base64,=">
+        <link rel="icon" href="/ExamenPrograIV/images/landing-page.png" >
     </head>
     <body class=" bg-dark text-white">
         <div class="p-3 bg-dark border w-90 mx-auto">

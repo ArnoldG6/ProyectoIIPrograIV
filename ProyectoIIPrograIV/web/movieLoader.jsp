@@ -7,7 +7,7 @@
         <meta charset="UTF-8">
         <title>NGC Cinema</title>
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
-        <link rel="icon" href="data:;base64,=">
+        <link rel="icon" href="/ExamenPrograIV/images/landing-page.png" >
     </head>
     <body class="d-flex flex-column min-vh-100 bg-dark text-white">
         <div align='center' class="w-200 p-10 bg-dark">                                         

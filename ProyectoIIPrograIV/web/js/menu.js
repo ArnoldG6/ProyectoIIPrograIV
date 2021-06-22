@@ -6,10 +6,7 @@ var menu=`
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="menu">
-        <ul class="navbar-nav ml-auto" id="menuUl">
-          <li class="nav-item">
-            <a class="nav-link" href="/ExamenPrograIV/loadMovies">Contact us</a>
-          </li>`;  
+        <ul class="navbar-nav ml-auto" id="menuUl">`;  
           
             let usuarioJson = sessionStorage.getItem('user');
             
