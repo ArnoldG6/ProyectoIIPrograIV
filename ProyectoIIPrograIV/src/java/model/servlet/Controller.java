@@ -167,7 +167,7 @@ public class Controller extends HttpServlet {
             session.setAttribute("exc", e.getMessage());
             throw e;
         }
-        return "/presentation/mainpage/mainpage.jsp";
+        return "/seePurchases.jsp";
     }
 
 }
