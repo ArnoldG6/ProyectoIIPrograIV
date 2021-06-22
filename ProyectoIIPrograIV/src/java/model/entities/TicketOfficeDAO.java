@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Room;
 import model.ticketOffice;
 
 /**
@@ -40,7 +41,7 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
     @Override
     public HashMap<String, ticketOffice> listAll() {
         HashMap<String, ticketOffice> u = new HashMap<>();
-        String id, room_id;
+        String id, room_p="";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
@@ -48,12 +49,12 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
                     ResultSet rs = stm.executeQuery(TicketOfficeCRUD.CMD_LIST)) {
                 while (rs.next()) {
                     id = rs.getString("id");
-                    room_id = rs.getString("room_id");
                     u.put(id, (new ticketOffice(id,
                                rs.getString("idClient"),
                             rs.getString("movie_name"),
                             rs.getInt("occupied"),
                             Double.parseDouble(rs.getString("total")))));
+                    room_p = rs.getString("room_id");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(TicketOfficeDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -73,6 +74,7 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
 
     @Override//(id, idClient, nomMovie, occupied, total, room_id)
     public void add(String id, ticketOffice value) throws IllegalArgumentException {
+        Room p=new Room("unico");
         String prueba="";
         try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(TicketOfficeCRUD.CMD_ADD)) {
@@ -85,6 +87,9 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
             for (int i = 0; i < RoomDAO.getInstance().listAll().size(); i++) {
                 if(RoomDAO.getInstance().listAll().get(i).getTicketOffices().get(value.getId())!=null){
                     prueba=RoomDAO.getInstance().listAll().get(i).getId();
+                }
+                else{
+                    prueba=p.getId();
                 }
             }
             stm.setString(6, prueba);
