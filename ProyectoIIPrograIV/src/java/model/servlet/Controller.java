@@ -88,13 +88,7 @@ public class Controller extends HttpServlet {
 
     private String schedule(HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession(true);
-        User u = (User) session.getAttribute("user");
-        if (u != null) {
-            if (u.getRole().equals("ADM")) {
-                session.setAttribute("movs", Cinema.getInstance().getBilldBoards());
-            }
-        }
-
+        session.setAttribute("movs", Cinema.getInstance().getAllMovies());
         return "mainPage.jsp";
     }
 

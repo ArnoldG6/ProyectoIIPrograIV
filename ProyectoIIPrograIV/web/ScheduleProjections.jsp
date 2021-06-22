@@ -32,8 +32,13 @@
                     <% if (movs != null) { %>
                     <%for (Map.Entry<String, Movie> entry : movs.entrySet()) { %>
                     <% Movie s = movs.get(entry.getKey());%>
-                    <option value = <%= s.getId()%>> <%= s.getId()%>%> </option>
+                    <option value = <%= s.getId()%>> <%= s.getName()%>%> </option>
                     <% }%>
+                    <% }%>
+                    <% else { %>
+                    <div>
+                        <span>Movies null</span>
+                    </div>
                     <% }%>
                 </select>
                 <div>
