@@ -1,12 +1,13 @@
 package model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
  *
  * @author victo
  */
-public class Movie {
+public class Movie implements Serializable{
 
     String id;
     String name;
@@ -35,16 +36,17 @@ public class Movie {
     @Override
     public String toString(){
         String s = "{";
-        s += "id: "+id+", ";
-        s += "name: "+name+", ";
-        s += "description: "+description+", ";
-        s += "publicationYear: "+publicationYear+", ";
-        s += "director: "+director+", ";
-        s += "inBillboard: "+inBillboard+", ";
+        s += "id: "+getId()+", ";
+        s += "name: "+getName()+", ";
+        s += "description: "+getDescription()+", ";
+        s += "publicationYear: "+getPublicationYear()+", ";
+        s += "director: "+getDirector()+", ";
+        s += "inBillboard: "+getInBillboard()+", ";
         s += "projections: "+" null "+", ";
-        s += "imgLink: "+imgLink+"}";
+        s += "imgLink: "+getImgLink()+"}";
         return s;
     }
+
     public String getId() {
         return id;
     }
@@ -108,5 +110,4 @@ public class Movie {
     public void setProjections(HashMap<String, Projections> projections) {
         this.projections = projections;
     }
-
 }

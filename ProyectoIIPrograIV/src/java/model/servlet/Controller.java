@@ -15,7 +15,7 @@ import model.Room;
  *
  * @author Vic
  */
-@WebServlet(name = "Controller", urlPatterns = {"/registerRoom"})
+@WebServlet(name = "Controller", urlPatterns = {"/registerRoom","/loadMovies"})
 public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -26,6 +26,9 @@ public class Controller extends HttpServlet {
                 case "/registerRoom":
                     viewURL = this.registerRoom(request, response);
                     break;
+                case "/loadMovies": 
+                    viewURL = this.showMovies(request,response);
+                    break;
                 default:
                     viewURL = "/index.html";
             }
@@ -34,7 +37,11 @@ public class Controller extends HttpServlet {
             request.getRequestDispatcher("/index.html").forward(request, response);
         }
     }
-
+    public String showMovies(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        Cinema.getInstance().updateModel();
+        request.setAttribute("billboards", Cinema.getInstance().getBilldBoards());
+        return "/movieLoader.jsp";
+    }
     public String registerRoom(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         try {
