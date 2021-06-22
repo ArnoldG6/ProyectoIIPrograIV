@@ -20,7 +20,7 @@
         <div class="container">
 
             <% if (billboards != null) { %>
-            <h1 class="text-white text-center">Listado de Peliculas Registradas</h1>
+            <h1 class="text-white text-center">Listado de Películas Registradas</h1>
             <div class="row p-1 bg-dark column card-body w-15">
                 <%for (HashMap.Entry<String, Movie> entry : billboards.entrySet()) { %>   
                 <% Movie sub = billboards.get(entry.getKey());%>

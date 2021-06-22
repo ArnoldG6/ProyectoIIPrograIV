@@ -19,7 +19,7 @@ import model.User;
  * @author Vic
  */
 @WebServlet(name = "Controller", urlPatterns = {"/registerRoom", "/loadMovies", "/schedule",
-                "/PutIn", "/GetOff","/searchMovies"})
+                "/PutIn", "/GetOff","/searchMovies","/print"})
 public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -43,6 +43,9 @@ public class Controller extends HttpServlet {
                     viewURL = this.getOff(request);
                     break;
                 case "/searchMovies": viewURL = this.searchMovies(request, response); break;
+                case "/print": viewURL = this.print(request);
+                               viewURL = this.generarReporte(request);
+                               break;
                 default:
                     viewURL = "mainPage.jsp";
                     break;
@@ -127,6 +130,16 @@ public class Controller extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private String print(HttpServletRequest request) throws Exception {
+        //KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
+        request.getSession(true).setAttribute("ticks", Cinema.getInstance().getAllTickets());
+        return "printTickets.jsp";
+    }
+    
+    private String generarReporte(HttpServletRequest request) throws Exception {
+       return "xxx";
     }
 
     @Override

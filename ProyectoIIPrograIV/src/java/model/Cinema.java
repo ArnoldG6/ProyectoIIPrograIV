@@ -21,6 +21,7 @@ public class Cinema {
     private HashMap<String, Room> rooms;
     private HashMap<String, Administrator> admins;
     private HashMap<String, Client> clients;
+    private HashMap<String, ticketOffice> tickets;
 
     public Cinema() {
         movies = new HashMap<>();
@@ -29,12 +30,14 @@ public class Cinema {
         rooms = new HashMap<>();
         admins = new HashMap<>();
         clients = new HashMap<>();
+        tickets = new HashMap<>();
 
     }
 
     public final void updateModel() throws Exception {
         Cinema.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
         Cinema.getInstance().setClient(ClientDAO.getInstance().listAll());
+        Cinema.getInstance().setTickets(TicketOfficeDAO.getInstance().listAll());
         HashMap<String, Movie> aux = movieDAO.getInstance().listAll();
         aux.values().removeIf(s -> !s.getInBillboard().equals("NO"));
         Cinema.getInstance().setMovies(aux);
@@ -65,6 +68,10 @@ public class Cinema {
 
     public HashMap<String, Movie> getAllMovies() throws Exception {
         return movieDAO.getInstance().listAll();
+    }
+    
+    public HashMap<String, ticketOffice> getAllTickets() throws Exception {
+        return TicketOfficeDAO.getInstance().listAll();
     }
 
     public void insertRoom(Room c) throws Exception {
@@ -125,6 +132,8 @@ public class Cinema {
             throw e;
         }
     }
+    
+    
 
     public HashMap<String, Movie> getMoviesMap() throws Exception {
         updateModel();
@@ -186,6 +195,8 @@ public class Cinema {
             throw e;
         }
     }
+    
+    
 
     public void scheduleBillboard(String id, String inB) throws Exception {
         if (Cinema.getInstance().getAllMovies() != null) {
@@ -241,6 +252,14 @@ public class Cinema {
 
     public void setClient(HashMap<String, Client> client) {
         this.clients = client;
+    }
+
+    public HashMap<String, ticketOffice> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(HashMap<String, ticketOffice> tickets) {
+        this.tickets = tickets;
     }
 
 }

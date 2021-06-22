@@ -31,7 +31,7 @@ var menu=`
                            class='nav-item'> <a class='nav-link' href='/ExamenPrograIV/schedule'>Programar Proyecciones</a> 
                         </li>
                         <li 
-                           class='nav-item'> <a class='nav-link' href='#' data-toggle='modal' data-target='#Dialog'>Imprimir Tiquetes</a> 
+                           class='nav-item'> <a class='nav-link' href='/ExamenPrograIV/print'>Imprimir Tiquetes</a> 
                         </li>`;
                     }
                     if(usuario.role == 'CLI'){
