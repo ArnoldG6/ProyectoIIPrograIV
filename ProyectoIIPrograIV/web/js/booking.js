@@ -186,7 +186,7 @@ function subStringAsientos() {
             asientos = cadena.split(separador);
     console.log(asientos);
     for (var i = 0; i < asientos.length-1; i++){
-        purchase(asientos[i]);
+        //purchase(asientos[i]);
         console.log(asientos[i]);
     }
 
@@ -195,13 +195,13 @@ function subStringAsientos() {
 
 var url = "http://localhost:8080/ExamenPrograIV/";
 
-function purchase(Asiento) {
+function purchase() {
     if (!valPurchase())
         return;
     if (!valPurchase()) return;
         ticketOffice = {
-            id: Asiento,
-            idClient: usuariofinal,
+            id: "",
+            idClient: "",
             occupied: 1,
             total: $("#costototal").val()
         };
@@ -211,13 +211,7 @@ function purchase(Asiento) {
         const response = await fetch(request);
         //$('#purchaseDialog').modal('hide');
         document.location = url;
-
     })();
-    var doc = new jsPDF();
-
-    doc.text(10, 10, "Hola");
-
-    doc.save("Compra.pdf");
 }
 
 function valPurchase() {
@@ -267,7 +261,7 @@ var csm = `
       <div class="collapse navbar-collapse" id="csm">
         <ul class="navbar-nav ml-auto" id="csmUl">`;
 
-let usuarioJson = sessionStorage.getItem('user');
+//let usuarioJson = sessionStorage.getItem('user');
 
 if (usuarioJson !== null) {
     let usuario = JSON.parse(usuarioJson);
