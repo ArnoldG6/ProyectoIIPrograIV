@@ -41,8 +41,8 @@ public class Cinema {
         aux = movieDAO.getInstance().listAll();
         aux.values().removeIf(s -> !s.getInBillboard().equals("SI"));
         Cinema.getInstance().setBilldBoards(aux);
-        System.out.println("BILLBOARDS: "+Cinema.getInstance().getBilldBoards());
-        System.out.println("MOVIES: "+Cinema.getInstance().getMovies());
+        //System.out.println("BILLBOARDS: "+Cinema.getInstance().getBilldBoards());
+        //System.out.println("MOVIES: "+Cinema.getInstance().getMovies());
 
     }
     public void insertClient(Client c) throws Exception{
@@ -58,7 +58,9 @@ public class Cinema {
         }
         ClientDAO.getInstance().add(c);
     }
-    
+    public HashMap<String, Movie> getAllMovies() throws Exception{
+        return movieDAO.getInstance().listAll();
+    }
     public void insertRoom(Room c) throws Exception{
         updateModel();
         Room room = Cinema.getInstance().getRooms().get(c.getId());

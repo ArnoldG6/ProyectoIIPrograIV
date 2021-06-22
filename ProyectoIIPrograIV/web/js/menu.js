@@ -1,14 +1,14 @@
 var menu=`
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="index.html"><div>HOME</div></a>
+      <a class="navbar-brand" href="/ExamenPrograIV/loadMovies"><div>HOME</div></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" >
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="menu">
         <ul class="navbar-nav ml-auto" id="menuUl">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Contact us</a>
+            <a class="nav-link" href="/ExamenPrograIV/loadMovies">Contact us</a>
           </li>`;  
           
             let usuarioJson = sessionStorage.getItem('user');

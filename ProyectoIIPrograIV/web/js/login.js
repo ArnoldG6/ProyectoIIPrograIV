@@ -13,10 +13,7 @@ var url="http://localhost:8080/ExamenPrograIV/";
             usuario = await response.json();
             sessionStorage.setItem('user', JSON.stringify(usuario));
             $('#loginDialog').modal('hide');
-           switch(usuario.role){
-               case 'ADM': document.location = url; break;
-               case 'CLI': document.location = url; break;
-           }                           
+           document.location = url+"loadMovies";                         
         })(); 
     }
 
@@ -31,7 +28,7 @@ var url="http://localhost:8080/ExamenPrograIV/";
             const response = await fetch(request);
             if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return;}
             sessionStorage.removeItem('user');
-            document.location = url+"index.html";                         
+            document.location = url+"loadMovies";                         
         })();          
     }
 

@@ -21,7 +21,7 @@
         <div class="container">
 
             <% if (billboards != null) { %>
-            <h1 class="text-white text-center">Taquilla</h1>
+            <h1 class="text-white text-center">Listado de Peliculas Registradas</h1>
             <div class="row p-1 bg-dark column card-body w-15">
                 <%for (HashMap.Entry<String, Movie> entry : billboards.entrySet()) { %>   
                 <% Movie sub = billboards.get(entry.getKey());%>
@@ -31,11 +31,12 @@
                     <a href="#" id="imagen1" class="p-3 bg-dark text-center" >
                         <img src='<%=sub.getImgLink()%>' height="150" width = "150">
                     </a>
-                    <div><label class="card-title text-center"><%= sub.getId()+"-"+sub.getName()%></label></div>
+                    <div class="text-center" ><label class="card-title text-center"><%= "ID: "+ sub.getId()+" Nombre: "+sub.getName()%></label></div>
                     <div>&nbsp;</div>
-                    <div><label class="text-center"><%= sub.getDescription()%></label></div>
+                    <div  class="text-center"><label><%= "Descripción: "+sub.getDescription()%></label></div>
                     <div>&nbsp;</div>
-                    <div><label class="text-center"><%= sub.getDirector()%></label></div>
+                    <div  class="text-center"><label><%= "Director: "+ sub.getDirector()%></label></div>
+                    <div  class="text-center"><label><%= "En taquilla: "+ sub.getInBillboard()%></label></div>
                     <a class ="btn btn-outline-light container center_div w-75 p-1" href="#">
                         Comprar tiquete(s)
                     </a>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="refresh" content="0; url=/ExamenPrograIV/loadMovies" />
+         <meta charset="UTF-8">
         <title>NGC Cinema</title>
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -19,18 +19,7 @@
             <h4 class="card-title mt-3 text-center">NGC Cinema</h4> 
             <img class="w-100 mx-auto" src="images/csm.png" height="250" width = "800">
         </div>
-        <div class="container">
-            <div class="card bg-dark">
-                <div class="card-body mx-auto h5" style="max-width: 800px;">
-                    <div class="d-inline-block">
-                        <div id = "movies_img_list"
-                        class="row p-1 bg-dark column card-body w-15">
-                            
-                        </div>
-                    </div>
-                </div>            
-            </div>
-        </div>
+        <%@ include file="/movieLoader.jsp" %>
         <div class="d-flex justify-content-center">
             <object type="text/html" data="Footer.html"></object>
         </div>
