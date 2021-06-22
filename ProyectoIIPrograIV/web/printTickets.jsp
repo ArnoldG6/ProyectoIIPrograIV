@@ -29,7 +29,7 @@
             <div class = "form-group">
                 <H1 class = "text-center text-white">Registro de proyecciones</H1>
                 <% if (ticks != null) { %>
-                <select name="newBillboard" class ="form-control text-center">
+                <select name="comboTickets" class ="form-control text-center">
                     <option value="" selected>Seleccione una Compra</option>
 
                     <%for (Map.Entry<String, ticketOffice> entry : ticks.entrySet()) { %>
@@ -41,13 +41,14 @@
                 <div class="text-white text-center">No hay compras disponibles para proyectar</div>
                 <% }%>
                 <div>
-                    <div>&nbsp;</div>
-                    <div>&nbsp;</div>
-                    <button class ="btn btn-outline-light form-control w-50">Gererar Reporte PDF</button>
                 </div>
             </div>
         </form>
-
+                <form class = "container center_div w-75 p-3" action="/ExamenPrograIV/pdf" method="POST">
+                    <input type="submit" value="Visualizar PDF" name="btnPDF" />
+                </form>
+        
+                
         <div class="d-flex justify-content-center">
             <object type="text/html" data="Footer.html"></object>
         </div>

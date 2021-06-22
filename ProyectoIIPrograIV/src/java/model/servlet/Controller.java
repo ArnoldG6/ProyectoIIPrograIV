@@ -1,6 +1,15 @@
 package model.servlet;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -13,6 +22,7 @@ import model.Administrator;
 import model.Cinema;
 import model.Room;
 import model.User;
+import model.ticketOffice;
 
 /**
  *
@@ -46,9 +56,9 @@ public class Controller extends HttpServlet {
                     viewURL = this.searchMovies(request, response);
                     break;
                 case "/print":
-                    viewURL = this.print(request);
-                    viewURL = this.generarReporte(request);
-                    break;
+                    viewURL = this.print(request);break;
+                case "/pdf": 
+                    viewURL = this.generarReporte(request,response);break;
                     case "/seePurchases":
                     viewURL = this.seePurchases(request);
                     break;
@@ -148,8 +158,51 @@ public class Controller extends HttpServlet {
         return "printTickets.jsp";
     }
 
-    private String generarReporte(HttpServletRequest request) throws Exception {
-        return "xxx";
+    private String generarReporte(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HttpSession session = request.getSession(true);
+        try{
+        String numTick = request.getParameter("comboTickets");
+            System.out.println(numTick);
+        if(numTick.isEmpty()) {
+            throw new IOException("El campo no debe estar vacio.");
+        }
+        
+        ticketOffice t = Cinema.getInstance().ticketFind(numTick);
+        
+        if(t==null){
+            throw new Exception("No existe el ticket.");
+        }else{
+            
+            System.out.println(t.getId());
+        
+        OutputStream out = response.getOutputStream();
+ 
+        Document documento = new Document();
+        PdfWriter.getInstance(documento, out);
+        
+        documento.open();
+        
+        Paragraph par1 = new Paragraph();
+        Font fontTitulo = new Font(Font.FontFamily.HELVETICA,16,Font.BOLD,BaseColor.BLACK);
+        par1.add(new Phrase("REPORTE DE TICKET",fontTitulo));
+        par1.setAlignment(Element.ALIGN_CENTER);
+        par1.add(new Phrase(Chunk.NEWLINE));
+        par1.add(new Phrase(Chunk.NEWLINE));
+        par1.add(new Phrase("ID: "+t.getId()));
+        par1.add(new Phrase("ID Cliente: "+t.getIdClient()));
+        par1.add(new Phrase("Ocupado: "+t.getOccupied()));
+        par1.add(new Phrase("Pelicula: "+t.getMovie()));
+        par1.add(new Phrase("Total: "+t.getTotal()));
+        documento.add(par1);
+        documento.close();
+        
+        }
+        
+        request.getRequestDispatcher("printTickets.jsp").forward(request, response);
+        }catch(Exception e){
+           throw e;
+        }  
+       return "printTickets.jsp";
     }
 
     @Override

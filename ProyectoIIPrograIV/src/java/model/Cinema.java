@@ -48,6 +48,11 @@ public class Cinema {
         //System.out.println("MOVIES: "+Cinema.getInstance().getMovies());
 
     }
+    
+    public ticketOffice ticketFind(String id) throws Exception{
+        if (getTickets().get(id)!=null) return getTickets().get(id);
+        else throw new Exception("Usuario no existe");
+    }
 
     public void insertClient(Client c) throws Exception {
         HashMap<String, User> users = Cinema.getInstance().getUsersMap();
