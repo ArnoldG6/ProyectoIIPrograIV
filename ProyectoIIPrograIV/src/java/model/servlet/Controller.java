@@ -121,14 +121,15 @@ public class Controller extends HttpServlet {
     }
 
     private String putIn(HttpServletRequest request) throws Exception {
-        String idMovie = request.getParameter("newBillboard");
-        Cinema.getInstance().scheduleBillboard(idMovie, "SI");
+        
+        //String idMovie = request.getParameter("newBillboard");
+        //Cinema.getInstance().scheduleBillboard(idMovie, "SI");
         return "mainPage.jsp";
     }
 
     private String getOff(HttpServletRequest request) throws Exception {
-        String idMovie = request.getParameter("newBillboard");
-        Cinema.getInstance().scheduleBillboard(idMovie, "NO");
+        //String idMovie = request.getParameter("newBillboard");
+        //Cinema.getInstance().scheduleBillboard(idMovie, "NO");
         return "mainPage.jsp";
     }
 
