@@ -40,7 +40,7 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
     @Override
     public HashMap<String, ticketOffice> listAll() {
         HashMap<String, ticketOffice> u = new HashMap<>();
-        String id;
+        String id, room_id;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
@@ -48,6 +48,7 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
                     ResultSet rs = stm.executeQuery(TicketOfficeCRUD.CMD_LIST)) {
                 while (rs.next()) {
                     id = rs.getString("id");
+                    room_id = rs.getString("room_id");
                     u.put(id, (new ticketOffice(id,
                                rs.getString("idClient"),
                             rs.getString("nomMovie"),
