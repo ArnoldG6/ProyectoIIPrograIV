@@ -46,7 +46,7 @@
 
             </div>
             <% } else { %>
-            <div class="text-white text-center"></div>
+            <div class="text-white text-center">No hay peliculas disponibles para proyectar</div>
             <% }%>
         </div>
     </body>

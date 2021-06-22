@@ -23,37 +23,28 @@
             <h4 class="card-title mt-3 text-center">NGC Cinema</h4> 
             <img class="w-100 mx-auto" src="images/csm.png" height="250" width = "800">
         </div>
-        
+
         <form class = "container center_div w-75 p-3" name = "regForm" action="/ExamenPrograIV/schedule" method="POST">
             <div class = "form-group">
-                <label for = "regSorApu">Schedule</label>
+                <H1 class = "text-center text-white">Registro de proyecciones</H1>
+                <% if (movs != null) { %>
                 <select name="newBillboard" class ="form-control text-center">
                     <option value="" selected>Seleccione una pelicula</option>
-                    <% if (movs != null) { %>
+
                     <%for (Map.Entry<String, Movie> entry : movs.entrySet()) { %>
                     <% Movie s = movs.get(entry.getKey());%>
-                    <option value = <%= s.getId()%>> <%= s.getName()%>%> </option>
-                    <% }%>
-                    <% }%>
-                    <% else { %>
-                    <div>
-                        <span>Movies null</span>
-                    </div>
+                    <option value = <%= s.getId()%> > <%= s.getName()%> </option>
                     <% }%>
                 </select>
+                <% } else {%>
+                <div class="text-white text-center">No hay peliculas disponibles para proyectar</div>
+                <% }%>
                 <div>
-                    <button type="button" id="changeBillboard" class="btn btn-primary btn-lg btn-block" 
-                            href="/ExamenPrograIV/PutIn">
-                        Poner en Cartelera
-                    </button>
-                    <button type="button" id="changeBillboard" class="btn btn-primary btn-lg btn-block" 
-                            href="/ExamenPrograIV/GetOff">
-                        Quitar de Cartelera
-                    </button>
+
                 </div>
             </div>
         </form>
-        
+
         <div class="d-flex justify-content-center">
             <object type="text/html" data="Footer.html"></object>
         </div>

@@ -1,7 +1,7 @@
 var menu=`
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-      <a class="navbar-brand" href="/ExamenPrograIV/loadMovies"><div>HOME</div></a>
+      <a class="navbar-brand" href="/ExamenPrograIV/loadMovies"><div>PAGINA DE INICIO</div></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" >
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -15,21 +15,21 @@ var menu=`
                 if (['ADM', 'CLI'].includes(usuario.role)){
                     menu+=` 
                         <li class="nav-item">
-                            <a class="nav-link" href="/ExamenPrograIV/booking.html">Book a Movie</a>
+                            <a class="nav-link" href="/ExamenPrograIV/booking.html">Comprar un tiquete</a>
                         </li>`;
                     if(usuario.role == 'ADM'){
                         menu+=`
                         <li 
-                           class='nav-item'> <a class='nav-link' href='/ExamenPrograIV/registerRoom.jsp'>Register Room</a> 
+                           class='nav-item'> <a class='nav-link' href='/ExamenPrograIV/registerRoom.jsp'>Registrar una sala</a> 
                         </li>
                         <li 
-                           class='nav-item'> <a class='nav-link' href='#' data-toggle='modal' data-target='#registerMovieDialog'>Register Movie</a> 
+                           class='nav-item'> <a class='nav-link' href='#' data-toggle='modal' data-target='#registerMovieDialog'>Ingresar pelicula</a> 
                         </li>
                         <li 
-                           class='nav-item'> <a class='nav-link' href='/ExamenPrograIV/ScheduleProjections.jsp'>Schedule Projections</a> 
+                           class='nav-item'> <a class='nav-link' href='/ExamenPrograIV/schedule'>Programar Proyecciones</a> 
                         </li>
                         <li 
-                           class='nav-item'> <a class='nav-link' href='#' data-toggle='modal' data-target='#Dialog'>Print Tickets</a> 
+                           class='nav-item'> <a class='nav-link' href='#' data-toggle='modal' data-target='#Dialog'>Imprimir Tiquetes</a> 
                         </li>`;
                     }
                     if(usuario.role == 'CLI'){
@@ -42,7 +42,7 @@ var menu=`
                     <li class='nav-item dropdown'>
                       <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#'> ${usuario.name}</a>
                       <div class='dropdown-menu'>
-                        <a class='dropdown-item' id='logout'>Exit</a>
+                        <a class='dropdown-item' id='logout'>Cerrar sesion</a>
                       </div>
                     </li>
                     `;                

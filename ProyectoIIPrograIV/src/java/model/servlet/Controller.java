@@ -93,9 +93,8 @@ public class Controller extends HttpServlet {
     }
 
     private String schedule(HttpServletRequest request) throws Exception {
-        HttpSession session = request.getSession(true);
-        session.setAttribute("movs", Cinema.getInstance().getAllMovies());
-        return "mainPage.jsp";
+        request.getSession(true).setAttribute("movs", Cinema.getInstance().getAllMovies());
+        return "ScheduleProjections.jsp";
     }
 
     private String putIn(HttpServletRequest request) throws Exception {
