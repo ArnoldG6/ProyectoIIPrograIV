@@ -37,7 +37,7 @@ public class Cinema {
     public final void updateModel() throws Exception {
         Cinema.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
         Cinema.getInstance().setClient(ClientDAO.getInstance().listAll());
-        Cinema.getInstance().setTickets(TicketOfficeDAO.getInstance().listAll());
+        //Cinema.getInstance().setTickets(TicketOfficeDAO.getInstance().listAll());
         HashMap<String, Movie> aux = movieDAO.getInstance().listAll();
         aux.values().removeIf(s -> !s.getInBillboard().equals("NO"));
         Cinema.getInstance().setMovies(aux);

@@ -51,7 +51,7 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
                     room_id = rs.getString("room_id");
                     u.put(id, (new ticketOffice(id,
                                rs.getString("idClient"),
-                            rs.getString("nomMovie"),
+                            rs.getString("movie_name"),
                             rs.getInt("occupied"),
                             Double.parseDouble(rs.getString("total")))));
                 }
@@ -109,47 +109,13 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
 
     @Override
     public ticketOffice recover(String id, String pass) {
-        ticketOffice result = null;
-        String username;
-        try {
-            try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
-                    PreparedStatement stm = cnx.prepareStatement(TicketOfficeCRUD.CMD_RECOVER)) {
-                stm.clearParameters();
-                stm.setString(1, id);
-                stm.setString(2, pass);
-                try (ResultSet rs = stm.executeQuery()) {
-                    if (rs.next()) {
-                        username = rs.getString("id");
-                        result = new ticketOffice(username,
-                               rs.getString("idClient"),
-                            rs.getString("nomMovie"),
-                            rs.getInt("occupied"),
-                            Double.parseDouble(rs.getString("total")));
-                        
-                    }
-                }
-            }
-        } catch (SQLException ex) {
-            System.err.printf("Exception: '%s'%n", ex.getMessage());
-        }
-        return result;
+        return null;
     }
 
     @Override
     //This update only updates username, not sure about updating id
     public void update(String id, ticketOffice value) {
-        try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
-                PreparedStatement stm = cnx.prepareStatement(TicketOfficeCRUD.CMD_UPDATE_USERNAME)) {
-            stm.clearParameters();
-            stm.setString(1, id);
-            if (stm.executeUpdate() != 1) {
-                throw new IllegalArgumentException(
-                        String.format("It couldn't update the register: '%s'", value.getId()));
-            }
-        } catch (IllegalArgumentException | SQLException ex) {
-            System.err.printf("Excepción: '%s'%n", ex.getMessage());
-            throw new IllegalArgumentException(ex.getMessage());
-        }
+        return ;
     }
 
     public void update(ticketOffice u) {
