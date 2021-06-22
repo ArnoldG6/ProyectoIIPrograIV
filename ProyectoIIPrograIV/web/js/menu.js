@@ -29,7 +29,7 @@ var menu=`
                            class='nav-item'> <a class='nav-link' href='#' data-toggle='modal' data-target='#registerMovieDialog'>Register Movie</a> 
                         </li>
                         <li 
-                           class='nav-item'> <a class='nav-link' href='#' data-toggle='modal' data-target='#Dialog'>Schedule Projections</a> 
+                           class='nav-item'> <a class='nav-link' href='/ExamenPrograIV/ScheduleProjections.jsp'>Schedule Projections</a> 
                         </li>
                         <li 
                            class='nav-item'> <a class='nav-link' href='#' data-toggle='modal' data-target='#Dialog'>Print Tickets</a> 
@@ -45,7 +45,7 @@ var menu=`
                     <li class='nav-item dropdown'>
                       <a class='nav-link dropdown-toggle' data-toggle='dropdown' href='#'> ${usuario.name}</a>
                       <div class='dropdown-menu'>
-                        <a class='dropdown-item' id='logout'>Salir</a>
+                        <a class='dropdown-item' id='logout'>Exit</a>
                       </div>
                     </li>
                     `;                

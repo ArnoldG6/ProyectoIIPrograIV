@@ -18,7 +18,8 @@ import model.User;
  *
  * @author Vic
  */
-@WebServlet(name = "Controller", urlPatterns = {"/registerRoom","/loadMovies"})
+@WebServlet(name = "Controller", urlPatterns = {"/registerRoom", "/loadMovies", "/schedule",
+                "/PutIn", "/GetOff"})
 public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -29,33 +30,46 @@ public class Controller extends HttpServlet {
                 case "/registerRoom":
                     viewURL = this.registerRoom(request, response);
                     break;
-                case "/loadMovies": 
-                    viewURL = this.loadMovies(request,response);
+                case "/loadMovies":
+                    viewURL = this.loadMovies(request, response);
+                    break;
+                case "/schedule":
+                    viewURL = this.schedule(request);
+                    break;
+                case "/PutIn":
+                    viewURL = this.putIn(request);
+                    break;
+                    case "/GetOff":
+                    viewURL = this.getOff(request);
                     break;
                 default:
                     viewURL = "mainPage.jsp";
                     break;
-            } 
+            }
             request.getRequestDispatcher(viewURL).forward(request, response);
         } catch (Exception e) {
             request.getRequestDispatcher("mainPage.jsp").forward(request, response);
         }
     }
-    public String loadMovies(HttpServletRequest request, HttpServletResponse response) throws Exception{
+
+    public String loadMovies(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Cinema.getInstance().updateModel();
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("user");
-        if(user != null)
-            if(user.getRole().equals("ADM"))
-                 session.setAttribute("billboards", Cinema.getInstance().getAllMovies());
-            else
+        if (user != null) {
+            if (user.getRole().equals("ADM")) {
+                session.setAttribute("billboards", Cinema.getInstance().getAllMovies());
+            } else {
                 session.setAttribute("billboards", Cinema.getInstance().getBilldBoards());
-        else
+            }
+        } else {
             session.setAttribute("billboards", Cinema.getInstance().getBilldBoards());
-        
+        }
+
         //request.setAttribute("billboards", Cinema.getInstance().getBilldBoards());
         return "mainPage.jsp";
     }
+
     public String registerRoom(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         try {
@@ -72,6 +86,30 @@ public class Controller extends HttpServlet {
         return "mainPage.jsp";
     }
 
+    private String schedule(HttpServletRequest request) throws Exception {
+        HttpSession session = request.getSession(true);
+        User u = (User) session.getAttribute("user");
+        if (u != null) {
+            if (u.getRole().equals("ADM")) {
+                session.setAttribute("movs", Cinema.getInstance().getBilldBoards());
+            }
+        }
+
+        return "mainPage.jsp";
+    }
+
+    private String putIn(HttpServletRequest request) throws Exception {
+        String idMovie = request.getParameter("newBillboard");
+        Cinema.getInstance().scheduleBillboard(idMovie, "SI");
+        return "mainPage.jsp";
+    }
+
+    private String getOff(HttpServletRequest request) throws Exception {
+        String idMovie = request.getParameter("newBillboard");
+        Cinema.getInstance().scheduleBillboard(idMovie, "NO");
+        return "mainPage.jsp";
+    }
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -45,60 +45,72 @@ public class Cinema {
         //System.out.println("MOVIES: "+Cinema.getInstance().getMovies());
 
     }
-    public void insertClient(Client c) throws Exception{
+
+    public void insertClient(Client c) throws Exception {
         HashMap<String, User> users = Cinema.getInstance().getUsersMap();
-        for(HashMap.Entry<String, User> user : users.entrySet()) {
+        for (HashMap.Entry<String, User> user : users.entrySet()) {
             User u = users.get(user.getKey());
-            if(u.getEmail().equals(c.getEmail())) throw new IOException
-            ("Error: "+c.getEmail()+" ya está registrado.");
-            if(u.getId().equals(c.getId())) throw new IOException
-            ("Error: "+c.getId()+" ya está registrado.");
-            if(u.getTelNum().equals(c.getTelNum())) throw new IOException
-            ("Error: "+u.getTelNum()+" ya está registrado.");
+            if (u.getEmail().equals(c.getEmail())) {
+                throw new IOException("Error: " + c.getEmail() + " ya está registrado.");
+            }
+            if (u.getId().equals(c.getId())) {
+                throw new IOException("Error: " + c.getId() + " ya está registrado.");
+            }
+            if (u.getTelNum().equals(c.getTelNum())) {
+                throw new IOException("Error: " + u.getTelNum() + " ya está registrado.");
+            }
         }
         ClientDAO.getInstance().add(c);
     }
-    public HashMap<String, Movie> getAllMovies() throws Exception{
+
+    public HashMap<String, Movie> getAllMovies() throws Exception {
         return movieDAO.getInstance().listAll();
     }
-    public void insertRoom(Room c) throws Exception{
+
+    public void insertRoom(Room c) throws Exception {
         updateModel();
         Room room = Cinema.getInstance().getRooms().get(c.getId());
-        if(room == null) RoomDAO.getInstance().add(c.getId(), c);
-        else throw new Exception("La sala "+c.getId()+" ya está registrada." );
+        if (room == null) {
+            RoomDAO.getInstance().add(c.getId(), c);
+        } else {
+            throw new Exception("La sala " + c.getId() + " ya está registrada.");
+        }
     }
-    
-    public void insertMovie(Movie m) throws Exception{
+
+    public void insertMovie(Movie m) throws Exception {
         updateModel();
         HashMap<String, Movie> movi = Cinema.getInstance().getMoviesMap();
-        for(HashMap.Entry<String, Movie> mo : movi.entrySet()) {
+        for (HashMap.Entry<String, Movie> mo : movi.entrySet()) {
             Movie u = movi.get(mo.getKey());
-            if(u.getId().equals(m.getId())) throw new IOException
-            ("Error: "+m.getId()+" ya está registrado.");
+            if (u.getId().equals(m.getId())) {
+                throw new IOException("Error: " + m.getId() + " ya está registrado.");
+            }
         }
         movieDAO.getInstance().add(m);
     }
-    
+
     public static Cinema getInstance() {
-        if (instance == null) instance = new Cinema();
+        if (instance == null) {
+            instance = new Cinema();
+        }
         return instance;
     }
 
     public User seekUser(String id, String clave) throws Exception {
         //updateModel();
         HashMap<String, User> users = Cinema.getInstance().getUsersMap();
-        System.out.printf("USUARIOS: %s\n",users.toString());
+        System.out.printf("USUARIOS: %s\n", users.toString());
         User u = users.get(id);
-        if (u != null) 
-            if (u.correctPswd(clave)) 
+        if (u != null) {
+            if (u.correctPswd(clave)) {
                 return u;
-             else 
+            } else {
                 throw new IOException("La contraseña digitada no es correcta");
-            
-
-         else
+            }
+        } else {
             throw new IOException("El usuario digitado no existe");
-        
+        }
+
     }
 
     public HashMap<String, User> getUsersMap() throws Exception {
@@ -113,7 +125,7 @@ public class Cinema {
             throw e;
         }
     }
-    
+
     public HashMap<String, Movie> getMoviesMap() throws Exception {
         updateModel();
         HashMap<String, Movie> movi = new HashMap<>();
@@ -145,15 +157,22 @@ public class Cinema {
             throw e;
         }
     }
-    
+
     public void insertTicketOffice(String id) throws Exception {
         try {
             ticketOffice t1 = new ticketOffice(id);
-            TicketOfficeDAO.getInstance().add(t1.getId(),t1);
+            TicketOfficeDAO.getInstance().add(t1.getId(), t1);
         } catch (Exception e) {
             //throw new IOException("Este ID ya está registrado");
             throw e;
         }
+    }
+
+    public void scheduleBillboard(String id, String inB) throws Exception {
+        if (Cinema.getInstance().getAllMovies() != null) {
+            Cinema.getInstance().getAllMovies().get(id).setInBillboard(inB);
+        }
+        updateModel();
     }
 
     public HashMap<String, Movie> getMovies() {
@@ -193,7 +212,7 @@ public class Cinema {
     }
 
     public void setAdmins(HashMap<String, Administrator> admins) {
-        this.admins = admins; 
+        this.admins = admins;
     }
 
     public HashMap<String, Client> getClient() {
