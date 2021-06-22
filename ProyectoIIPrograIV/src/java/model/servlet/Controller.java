@@ -19,7 +19,7 @@ import model.User;
  * @author Vic
  */
 @WebServlet(name = "Controller", urlPatterns = {"/registerRoom", "/loadMovies", "/schedule",
-                "/PutIn", "/GetOff","/searchMovies","/print"})
+    "/PutIn", "/GetOff", "/searchMovies", "/print", "/seePurchases"})
 public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -39,13 +39,19 @@ public class Controller extends HttpServlet {
                 case "/PutIn":
                     viewURL = this.putIn(request);
                     break;
-                    case "/GetOff":
+                case "/GetOff":
                     viewURL = this.getOff(request);
                     break;
-                case "/searchMovies": viewURL = this.searchMovies(request, response); break;
-                case "/print": viewURL = this.print(request);
-                               viewURL = this.generarReporte(request);
-                               break;
+                case "/searchMovies":
+                    viewURL = this.searchMovies(request, response);
+                    break;
+                case "/print":
+                    viewURL = this.print(request);
+                    viewURL = this.generarReporte(request);
+                    break;
+                    case "/seePurchases":
+                    viewURL = this.seePurchases(request);
+                    break;
                 default:
                     viewURL = "mainPage.jsp";
                     break;
@@ -55,30 +61,34 @@ public class Controller extends HttpServlet {
             request.getRequestDispatcher("mainPage.jsp").forward(request, response);
         }
     }
-    public String loadMovies(HttpServletRequest request, HttpServletResponse response) throws Exception{
+
+    public String loadMovies(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Cinema.getInstance().updateModel();
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("user");
-        if(user != null)
-            if(user.getRole().equals("ADM"))
-                 session.setAttribute("billboards", Cinema.getInstance().getAllMovies());
-            else
+        if (user != null) {
+            if (user.getRole().equals("ADM")) {
+                session.setAttribute("billboards", Cinema.getInstance().getAllMovies());
+            } else {
                 session.setAttribute("billboards", Cinema.getInstance().getBilldBoards());
-        else
+            }
+        } else {
             session.setAttribute("billboards", Cinema.getInstance().getBilldBoards());
-        
+        }
+
         //request.setAttribute("billboards", Cinema.getInstance().getBilldBoards());
         return "mainPage.jsp";
     }
 
-    public String searchMovies(HttpServletRequest request, HttpServletResponse response) throws Exception{
+    public String searchMovies(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Cinema.getInstance().updateModel();
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("user");
         String searchCriteria = request.getParameter("searchCriteria");
-        session.setAttribute("moviesResult", Cinema.getInstance().searchMovies(user,searchCriteria));
+        session.setAttribute("moviesResult", Cinema.getInstance().searchMovies(user, searchCriteria));
         return "movieSearch.jsp";
-    }    
+    }
+
     public String registerRoom(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         try {
@@ -111,7 +121,7 @@ public class Controller extends HttpServlet {
         Cinema.getInstance().scheduleBillboard(idMovie, "NO");
         return "mainPage.jsp";
     }
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -131,26 +141,27 @@ public class Controller extends HttpServlet {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private String print(HttpServletRequest request) throws Exception {
         //KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK
         request.getSession(true).setAttribute("ticks", Cinema.getInstance().getAllTickets());
         return "printTickets.jsp";
     }
-    
+
     private String generarReporte(HttpServletRequest request) throws Exception {
-       return "xxx";
+        return "xxx";
     }
 
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
     private String seePurchases(HttpServletRequest request) throws Exception {
         try {
             HttpSession session = request.getSession(true);
-            //session.setAttribute("tickets", Cinema.getInstance().getAllTickets());
+            User u = (User) session.getAttribute("user");
+            session.setAttribute("tickets", Cinema.getInstance().getPurchases1(u.getId()));
         } catch (Exception e) {
             HttpSession session = request.getSession(true);
             session.setAttribute("exc", e.getMessage());

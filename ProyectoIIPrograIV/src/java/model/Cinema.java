@@ -133,7 +133,21 @@ public class Cinema {
         }
     }
     
-    
+    public HashMap<String, ticketOffice> getPurchases1(String idIntro) throws Exception {
+        updateModel();
+        HashMap<String, ticketOffice> ticketP = new HashMap<>();
+        try {
+            for (int i = 0; i < tickets.size(); i++) {
+                if(tickets.get(i).getIdClient().equals(idIntro)){
+                    ticketP.put(idIntro, tickets.get(i));
+                }
+            }
+            System.out.println(ticketP.toString());
+            return ticketP;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 
     public HashMap<String, Movie> getMoviesMap() throws Exception {
         updateModel();
@@ -195,8 +209,6 @@ public class Cinema {
             throw e;
         }
     }
-    
-    
 
     public void scheduleBillboard(String id, String inB) throws Exception {
         if (Cinema.getInstance().getAllMovies() != null) {
