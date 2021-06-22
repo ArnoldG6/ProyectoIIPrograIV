@@ -146,5 +146,17 @@ public class Controller extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    private String seePurchases(HttpServletRequest request) throws Exception {
+        try {
+            HttpSession session = request.getSession(true);
+            //session.setAttribute("tickets", Cinema.getInstance().getAllTickets());
+        } catch (Exception e) {
+            HttpSession session = request.getSession(true);
+            session.setAttribute("exc", e.getMessage());
+            throw e;
+        }
+        return "/presentation/mainpage/mainpage.jsp";
+    }
 
 }
