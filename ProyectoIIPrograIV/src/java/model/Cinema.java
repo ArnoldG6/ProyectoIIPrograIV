@@ -35,8 +35,15 @@ public class Cinema {
     public final void updateModel() throws Exception {
         Cinema.getInstance().setAdmins(AdministratorDAO.getInstance().listAll());
         Cinema.getInstance().setClient(ClientDAO.getInstance().listAll());
-        Cinema.getInstance().setMovies(movieDAO.getInstance().listAll());
-        System.out.println(movies.toString());
+        HashMap<String, Movie> aux = movieDAO.getInstance().listAll();
+        aux.values().removeIf(s -> !s.getInBillboard().equals("NO"));
+        Cinema.getInstance().setMovies(aux);
+        aux = movieDAO.getInstance().listAll();
+        aux.values().removeIf(s -> !s.getInBillboard().equals("SI"));
+        Cinema.getInstance().setBilldBoards(aux);
+        System.out.println("BILLBOARDS: "+Cinema.getInstance().getBilldBoards());
+        System.out.println("MOVIES: "+Cinema.getInstance().getMovies());
+
     }
     public void insertClient(Client c) throws Exception{
         HashMap<String, User> users = Cinema.getInstance().getUsersMap();

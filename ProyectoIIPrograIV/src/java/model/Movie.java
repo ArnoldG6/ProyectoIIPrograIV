@@ -32,7 +32,19 @@ public class Movie {
     public Movie() {
         this("", "", "", "", "","","");
     }
-
+    @Override
+    public String toString(){
+        String s = "{";
+        s += "id: "+id+", ";
+        s += "name: "+name+", ";
+        s += "description: "+description+", ";
+        s += "publicationYear: "+publicationYear+", ";
+        s += "director: "+director+", ";
+        s += "inBillboard: "+inBillboard+", ";
+        s += "projections: "+" null "+", ";
+        s += "imgLink: "+imgLink+"}";
+        return s;
+    }
     public String getId() {
         return id;
     }

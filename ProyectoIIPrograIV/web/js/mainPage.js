@@ -1,24 +1,18 @@
 var url="http://localhost:8080/ExamenPrograIV/";
-    function load(){
-        if (!loginValidar()) return;
-        usuario = {
-            id: $("#id").val(),
-            pass: $("#pass").val()
-        };       
-        let request = new Request(url+'api/login', {method: 'POST', headers: { 'Content-Type': 'application/json'},body: JSON.stringify(usuario)});
+    function load(){  
+        let request = new Request(url+'api/loadMovies', {method: 'POST', headers: { }});
         (async ()=>{
+            console.log("hola 1");
             const response = await fetch(request);
-            if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return;}
-            usuario = await response.json();
-            sessionStorage.setItem('user', JSON.stringify(usuario));
-            $('#loginDialog').modal('hide');
-           switch(usuario.role){
-               case 'ADM': document.location = url; break;
-               case 'CLI': document.location = url; break;
-           }                           
+            console.log("hola 2");
+            //if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return;}
+            let billboards = sessionStorage.getItem('billboards');           
+            console.log(billboards);
+            console.log("hola 3");
         })(); 
     }
   function errorMessage(status,place){  
+      console.log("hola errormsessage");
         switch(status){
             case 404: error= "Registro no encontrado"; break;
             case 403: case 405: error="Usuario no autorizado"; break;
@@ -30,13 +24,21 @@ var url="http://localhost:8080/ExamenPrograIV/";
         return;        
     }  
   function loadMovies(){
+      console.log("hola loadMovies 1");
         let request = new Request(url+'login.html', {method: 'GET'});
         (async ()=>{
+            console.log("hola loadMovies 2");
             const response = await fetch(request);
+            console.log("hola loadMovies 3");
             //if (!response.ok) {errorMessage(response.status,$("#loginDialog #errorDiv"));return;}
+            console.log("hola loadMovies 4");
+            load();
+            console.log("hola loadMovies 5")
             content = await response.text();
+            console.log("hola loadMovies 6");
             $('body').append(content); 
-            $("#login").click(login);                          
+            console.log("hola loadMovies 7");
+  
         })();     
   }
  
