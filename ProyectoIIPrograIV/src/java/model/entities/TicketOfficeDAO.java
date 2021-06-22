@@ -70,7 +70,7 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
         return instance;
     }
 
-    @Override
+    @Override//(id, idClient, nomMovie, occupied, total, room_id)
     public void add(String id, ticketOffice value) throws IllegalArgumentException {
         try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                 PreparedStatement stm = cnx.prepareStatement(TicketOfficeCRUD.CMD_ADD)) {
@@ -79,8 +79,8 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
             stm.setString(2, value.getIdClient());
             stm.setString(3, value.getMovie());
             stm.setInt(4, value.getOccupied());
-            stm.setString(5, "N/A");
-            stm.setString(6, String.valueOf(value.getTotal()));
+            stm.setString(5, String.valueOf(value.getTotal()));
+            stm.setString(6, "N/A");
             if (stm.executeUpdate() != 1) {
                 throw new IllegalArgumentException(
                         String.format("It couldn't add the register: '%s'", id));
