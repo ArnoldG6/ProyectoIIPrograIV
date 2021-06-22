@@ -15,11 +15,8 @@ public class movieCRUD {
     protected static final String CMD_RECOVER
             = "SELECT id, description, publicationYear, director, inBillboard, name, imgLink FROM cinema.movie "
             + "WHERE id = ?; ";
-    protected static final String CMD_UPDATE_USERNAME
-            = "UPDATE cinema.movie SET name = ?"
-            + "WHERE id = ?; ";
-    protected static final String CMD_UPDATE_ADMIN_ID
-            = "UPDATE cinema.movie SET name = ?"
+    protected static final String CMD_UPDATE_BILLBOARD
+            = "UPDATE cinema.movie SET inBillboard = ?"
             + "WHERE id = ?; ";
     protected static final String CMD_DELETE
             = "DELETE FROM cinema.movie "

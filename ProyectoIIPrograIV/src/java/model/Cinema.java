@@ -187,23 +187,27 @@ public class Cinema {
     }
 
     public void insertTicketOffice(String id) throws Exception {
-        try {
+        /*try {
+            
+            // public ticketOffice(String _id, String idClient, String nomMovie, int occup, double to)
             ticketOffice t1 = new ticketOffice(id);
             TicketOfficeDAO.getInstance().add(t1.getId(), t1);
         } catch (Exception e) {
             //throw new IOException("Este ID ya está registrado");
             throw e;
-        }
+        }*/
+        return ;
     }
     
     
 
     public void scheduleBillboard(String id, String inB) throws Exception {
-        if (Cinema.getInstance().getAllMovies() != null) {
-            Cinema.getInstance().getAllMovies().get(id).setInBillboard(inB);
-            movieDAO.getInstance().update(id, Cinema.getInstance().getAllMovies().get(id));
-        }
         updateModel();
+        Movie movie = Cinema.getInstance().getAllMovies().get(id);
+        if(movie == null) throw new IOException("La pelicula no existe");
+        movie.setInBillboard(inB);
+        movieDAO.getInstance().update_billboard(id, inB, movie);
+        
     }
 
     public HashMap<String, Movie> getMovies() {

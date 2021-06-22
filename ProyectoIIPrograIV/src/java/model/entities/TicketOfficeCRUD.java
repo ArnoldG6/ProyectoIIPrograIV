@@ -1,9 +1,5 @@
 package model.entities;
 
-/**
- *
- * @author victo
- */
 public class TicketOfficeCRUD {
     
     protected static final String CMD_LIST

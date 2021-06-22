@@ -129,22 +129,9 @@ public class movieDAO implements DAO<String, Movie> {
     }
 
     @Override
-    //This update only updates username, not sure about updating id
     public void update(String id, Movie value) {
-        try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
-                PreparedStatement stm = cnx.prepareStatement(movieCRUD.CMD_UPDATE_USERNAME)) {
-            stm.clearParameters();
-            stm.setString(1, id);
-            if (stm.executeUpdate() != 1) {
-                throw new IllegalArgumentException(
-                        String.format("It couldn't update the register: '%s'", value.getName()));
-            }
-        } catch (IllegalArgumentException | SQLException ex) {
-            System.err.printf("Excepción: '%s'%n", ex.getMessage());
-            throw new IllegalArgumentException(ex.getMessage());
-        }
+        return;
     }
-
     public void update(Movie u) {
         update(u.getName(), u);
     }
@@ -165,5 +152,19 @@ public class movieDAO implements DAO<String, Movie> {
             throw new IllegalArgumentException(ex.getMessage());
         }
     }
-
+        public void update_billboard(String id, String inBillboard, Movie value) {
+        try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
+                PreparedStatement stm = cnx.prepareStatement(movieCRUD.CMD_UPDATE_BILLBOARD)) {
+            stm.clearParameters();
+            stm.setString(1, inBillboard);
+            stm.setString(2, id);
+            if (stm.executeUpdate() != 1) {
+                throw new IllegalArgumentException(
+                        String.format("It couldn't update the register: '%s'", value.getName()));
+            }
+        } catch (IllegalArgumentException | SQLException ex) {
+            System.err.printf("Excepción: '%s'%n", ex.getMessage());
+            throw new IllegalArgumentException(ex.getMessage());
+        }
+    }
 }

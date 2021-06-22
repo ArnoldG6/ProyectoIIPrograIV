@@ -29,9 +29,9 @@ public class Purchase {
             try {
                 //ticketOffice1
                 if(ticketOffice1 == null) throw new Exception("ticketOffice1 no creado");
-                ticketOffice ticket1 = new ticketOffice(ticketOffice1.getId(), ticketOffice1.getIdClient(),1,ticketOffice1.getTotal());
+                ticketOffice ticket1 = new ticketOffice(ticketOffice1.getId(), ticketOffice1.getIdClient(),ticketOffice1.getMovie(),1,ticketOffice1.getTotal());
+                // public ticketOffice(String _id, String idClient, String nomMovie, int occup, double to)
                 if(ticket1 == null) throw new Exception("Usuario no creado");
-                Cinema.getInstance().insertTicketOffice(ticket1.getId());
                 System.out.println(ticketOffice1);
                 System.out.println(ticket1);
             } catch (Exception ex) {

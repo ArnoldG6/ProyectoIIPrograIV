@@ -27,6 +27,7 @@
         <form class = "container center_div w-75 p-3" name = "regForm" action="/ExamenPrograIV/schedule" method="POST">
             <div class = "form-group">
                 <H1 class = "text-center text-white">Registro de proyecciones</H1>
+                <div>&nbsp;</div>
                 <% if (movs != null) { %>
                 <select name="newBillboard" class ="form-control text-center">
                     <option value="" selected>Seleccione una pelicula</option>
@@ -35,7 +36,23 @@
                     <% Movie s = movs.get(entry.getKey());%>
                     <option value = <%= s.getId()%> > <%= s.getName()%> </option>
                     <% }%>
+                    
                 </select>
+                <div>&nbsp;</div> 
+                <div>&nbsp;</div> 
+                <div>&nbsp;</div> 
+                <div class = "text-center">
+                <a href="/ExamenPrograIV/PutIn" id="imagen1" class="p-3 bg-dark text-center" >
+                        <button class ="btn btn-outline-light form-control w-50" id = "agregar">Agregar a taquilla</button>
+                </a>
+                </div>   
+                <div>&nbsp;</div>
+                <div class = "text-center">
+                <a  href="/ExamenPrograIV/GetOff" id="imagen1" class="p-3 bg-dark text-center" >
+                    
+                        <button class ="btn btn-outline-light form-control w-50" id = "agregar">Remover de taquilla</button>
+                </a>
+                </div>    
                 <% } else {%>
                 <div class="text-white text-center">No hay peliculas disponibles para proyectar</div>
                 <% }%>

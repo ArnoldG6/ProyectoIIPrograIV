@@ -37,18 +37,18 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
 
         return 0;
     }
-
+    @Override
     public HashMap<String, ticketOffice> listAll() {
         HashMap<String, ticketOffice> u = new HashMap<>();
-        String username;
+        String id;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             try (Connection cnx = DriverManager.getConnection(DAO.path, "root", "root");
                     Statement stm = cnx.createStatement();
                     ResultSet rs = stm.executeQuery(TicketOfficeCRUD.CMD_LIST)) {
                 while (rs.next()) {
-                    username = rs.getString("id");
-                    u.put(username, (new ticketOffice(username,
+                    id = rs.getString("id");
+                    u.put(id, (new ticketOffice(id,
                                rs.getString("idClient"),
                             rs.getString("nomMovie"),
                             rs.getInt("occupied"),
@@ -77,9 +77,10 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
             stm.clearParameters();
             stm.setString(1, value.getId());
             stm.setString(2, value.getIdClient());
-            stm.setString(3, value.getMoviee());
+            stm.setString(3, value.getMovie());
             stm.setInt(4, value.getOccupied());
-            stm.setString(5, String.valueOf(value.getTotal()));
+            stm.setString(5, "N/A");
+            stm.setString(6, String.valueOf(value.getTotal()));
             if (stm.executeUpdate() != 1) {
                 throw new IllegalArgumentException(
                         String.format("It couldn't add the register: '%s'", id));
