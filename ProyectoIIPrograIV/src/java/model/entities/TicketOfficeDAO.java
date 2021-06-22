@@ -48,7 +48,11 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
                     ResultSet rs = stm.executeQuery(TicketOfficeCRUD.CMD_LIST)) {
                 while (rs.next()) {
                     username = rs.getString("id");
-                    u.put(username, (new ticketOffice(username, rs.getString("idClient"),rs.getInt("occupied"), Double.parseDouble(rs.getString("total")))));
+                    u.put(username, (new ticketOffice(username,
+                               rs.getString("idClient"),
+                            rs.getString("nomMovie"),
+                            rs.getInt("occupied"),
+                            Double.parseDouble(rs.getString("total")))));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(TicketOfficeDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -73,8 +77,9 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
             stm.clearParameters();
             stm.setString(1, value.getId());
             stm.setString(2, value.getIdClient());
-            stm.setInt(3, value.getOccupied());
-            stm.setString(4, String.valueOf(value.getTotal()));
+            stm.setString(3, value.getMoviee());
+            stm.setInt(4, value.getOccupied());
+            stm.setString(5, String.valueOf(value.getTotal()));
             if (stm.executeUpdate() != 1) {
                 throw new IllegalArgumentException(
                         String.format("It couldn't add the register: '%s'", id));
@@ -104,8 +109,13 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
                 stm.setString(2, pass);
                 try (ResultSet rs = stm.executeQuery()) {
                     if (rs.next()) {
-                        username = rs.getString("username");
-                        result = new ticketOffice(username, rs.getInt("occupied"));
+                        username = rs.getString("id");
+                        result = new ticketOffice(username,
+                               rs.getString("idClient"),
+                            rs.getString("nomMovie"),
+                            rs.getInt("occupied"),
+                            Double.parseDouble(rs.getString("total")));
+                        
                     }
                 }
             }
