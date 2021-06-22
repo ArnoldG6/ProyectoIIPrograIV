@@ -137,7 +137,26 @@ public class Cinema {
             throw e;
         }
     }
-
+        public HashMap<String, Movie> searchMovies(User user, String searchCriteria) throws Exception{
+        HashMap<String, Movie> aux_movies;
+        HashMap<String, Movie> result = new HashMap<String,Movie>();
+        if(user == null) aux_movies = Cinema.getInstance().getBilldBoards();
+        else
+            if (user.getRole().equals("ADM"))
+                aux_movies = Cinema.getInstance().getAllMovies();
+            else
+                aux_movies = Cinema.getInstance().getBilldBoards();
+        Movie value;
+        for (HashMap.Entry<String, Movie> entry : aux_movies.entrySet()) {
+                value = aux_movies.get(entry.getKey());
+                if (value.getDescription().toUpperCase().contains(searchCriteria.toUpperCase())
+                        || value.getDirector().toUpperCase().contains(searchCriteria.toUpperCase())
+                        || value.getName().toUpperCase().contains(searchCriteria.toUpperCase()) 
+                        || value.getId().toUpperCase().contains(searchCriteria.toUpperCase())) 
+                        result.put(value.getId(), value);
+        }
+        return result;
+    }
     public void insertAdmin(String nom, String id, String em, String cllph, String pass) throws Exception {
         try {
             Administrator ad = new Administrator(nom, id, em, cllph, pass);

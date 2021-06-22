@@ -1,29 +1,35 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="model.User"%>
 <%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@page import="model.Movie"%>
-<%HashMap<String, Movie> billboards = (HashMap<String, Movie>) session.getAttribute("billboards"); %>
+<% User user = (User) session.getAttribute("user");%>
+<%HashMap<String, Movie> moviesResult = (HashMap<String, Movie>) session.getAttribute("moviesResult"); %>
+<!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>NGC Cinema</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="icon" href="/ExamenPrograIV/images/landing-page.png" >
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
-        <link rel="icon" href="data:;base64,=">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">         
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>       
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> 
+        <title>Resultados de La Busqueda</title>
     </head>
     <body class="d-flex flex-column min-vh-100 bg-dark text-white">
-        <div align='center' class="w-200 p-10 bg-dark">                                         
-            <form name = "form" class = "container center_div w-75 p-3" action="/ExamenPrograIV/searchMovies" method="post">
-                <input  class = "container center_div w-75 p-1 text-center" type="text" name="searchCriteria" id = "searchCriteria" placeholder="Nombre, código, director o descripción de la pelicula" >
-                <div>&nbsp;</div>
-                <button class ="btn btn-outline-light form-control w-25" type = "submit">Buscar pelicula</button>
-            </form> 
-        </div> 
         <div class="container">
-
-            <% if (billboards != null) { %>
-            <h1 class="text-white text-center">Listado de Peliculas Registradas</h1>
+            <h1 class="text-white text-center">Resultados de la Búsqueda</h1>
+            <% if (moviesResult != null) { %>
+            <% if (moviesResult.size() == 0) {%>
+            <div  class="text-center">
+                 No se encontraron peliculas referentes al criterio de búsqueda
+            </div>
+            <% }%>
+            
             <div class="row p-1 bg-dark column card-body w-15">
-                <%for (HashMap.Entry<String, Movie> entry : billboards.entrySet()) { %>   
-                <% Movie sub = billboards.get(entry.getKey());%>
+                <%for (HashMap.Entry<String, Movie> entry : moviesResult.entrySet()) { %>   
+                <% Movie sub = moviesResult.get(entry.getKey());%>
 
 
                 <div class="card p-3 bg-dark col w-15">
@@ -43,10 +49,9 @@
 
 
                 <% } %>
-
             </div>
             <% } else { %>
-            <div class="text-white text-center"></div>
+            <div class="text-white text-center">No se encontraron peliculas referentes al criterio de búsqueda</div>
             <% }%>
         </div>
     </body>

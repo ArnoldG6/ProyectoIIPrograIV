@@ -19,7 +19,7 @@ import model.User;
  * @author Vic
  */
 @WebServlet(name = "Controller", urlPatterns = {"/registerRoom", "/loadMovies", "/schedule",
-                "/PutIn", "/GetOff"})
+                "/PutIn", "/GetOff","/searchMovies"})
 public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -42,6 +42,7 @@ public class Controller extends HttpServlet {
                     case "/GetOff":
                     viewURL = this.getOff(request);
                     break;
+                case "/searchMovies": viewURL = this.searchMovies(request, response); break;
                 default:
                     viewURL = "mainPage.jsp";
                     break;
@@ -51,25 +52,30 @@ public class Controller extends HttpServlet {
             request.getRequestDispatcher("mainPage.jsp").forward(request, response);
         }
     }
-
-    public String loadMovies(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String loadMovies(HttpServletRequest request, HttpServletResponse response) throws Exception{
         Cinema.getInstance().updateModel();
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("user");
-        if (user != null) {
-            if (user.getRole().equals("ADM")) {
-                session.setAttribute("billboards", Cinema.getInstance().getAllMovies());
-            } else {
+        if(user != null)
+            if(user.getRole().equals("ADM"))
+                 session.setAttribute("billboards", Cinema.getInstance().getAllMovies());
+            else
                 session.setAttribute("billboards", Cinema.getInstance().getBilldBoards());
-            }
-        } else {
+        else
             session.setAttribute("billboards", Cinema.getInstance().getBilldBoards());
-        }
-
+        
         //request.setAttribute("billboards", Cinema.getInstance().getBilldBoards());
         return "mainPage.jsp";
     }
 
+    public String searchMovies(HttpServletRequest request, HttpServletResponse response) throws Exception{
+        Cinema.getInstance().updateModel();
+        HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("user");
+        String searchCriteria = request.getParameter("searchCriteria");
+        session.setAttribute("moviesResult", Cinema.getInstance().searchMovies(user,searchCriteria));
+        return "movieSearch.jsp";
+    }    
     public String registerRoom(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         try {
