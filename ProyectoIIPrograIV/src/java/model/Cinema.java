@@ -171,6 +171,7 @@ public class Cinema {
     public void scheduleBillboard(String id, String inB) throws Exception {
         if (Cinema.getInstance().getAllMovies() != null) {
             Cinema.getInstance().getAllMovies().get(id).setInBillboard(inB);
+            movieDAO.getInstance().update(id, Cinema.getInstance().getAllMovies().get(id));
         }
         updateModel();
     }
