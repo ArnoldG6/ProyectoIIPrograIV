@@ -13,10 +13,10 @@ public class ticketOffice {
     double total;
 
 
-    public ticketOffice(String _id, String idClient, String nomMovie, int occup, double to) {
+    public ticketOffice(String _id, String idClient, String movie_name, int occup, double to) {
         this.id = _id;
         this.idClient = idClient;
-        this.movie = nomMovie;
+        this.movie = movie_name;
         this.occupied = occup;
         this.total = to;
     }

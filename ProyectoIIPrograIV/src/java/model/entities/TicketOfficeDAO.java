@@ -72,7 +72,7 @@ public class TicketOfficeDAO implements DAO<String, ticketOffice> {
         return instance;
     }
 
-    @Override//(id, idClient, nomMovie, occupied, total, room_id)
+    @Override//(id, idClient, movie_name, occupied, total, room_id)
     public void add(String id, ticketOffice value) throws IllegalArgumentException {
         Room p=new Room("unico");
         String prueba="";
