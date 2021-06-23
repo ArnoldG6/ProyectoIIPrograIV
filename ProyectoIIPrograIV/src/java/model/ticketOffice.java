@@ -61,7 +61,9 @@ public class ticketOffice {
     public double getTotal() {
         return total;
     }
-
+    public String getTotalS() {
+        return String.valueOf(total);
+    }
     public void setTotal(double total) {
         this.total = total;
     }

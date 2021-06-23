@@ -50,8 +50,7 @@ public class Cinema {
     }
     
     public ticketOffice ticketFind(String id) throws Exception{
-        if (getTickets().get(id)!=null) return getTickets().get(id);
-        else throw new Exception("Usuario no existe");
+        return getAllTickets().get(id);
     }
 
     public void insertClient(Client c) throws Exception {

@@ -3,6 +3,7 @@ package model.servlet;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
@@ -10,6 +11,8 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -28,7 +31,7 @@ import model.ticketOffice;
  * @author Vic
  */
 @WebServlet(name = "Controller", urlPatterns = {"/registerRoom", "/loadMovies", "/schedule",
-    "/PutIn", "/GetOff", "/searchMovies", "/print", "/seePurchases","/pdf"})
+    "/PutIn", "/GetOff", "/searchMovies", "/print", "/seePurchases", "/pdf"})
 public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -55,10 +58,12 @@ public class Controller extends HttpServlet {
                     viewURL = this.searchMovies(request, response);
                     break;
                 case "/print":
-                    viewURL = this.print(request);break;
-                case "/pdf": 
-                    viewURL = this.generarReporte(request,response);break;
-                    case "/seePurchases":
+                    viewURL = this.print(request);
+                    break;
+                case "/pdf":
+                    viewURL = this.generarReporte(request, response);
+                    break;
+                case "/seePurchases":
                     viewURL = this.seePurchases(request);
                     break;
                 default:
@@ -120,7 +125,7 @@ public class Controller extends HttpServlet {
     }
 
     private String putIn(HttpServletRequest request) throws Exception {
-        
+
         String idMovie = request.getParameter("newBillboard");
         Cinema.getInstance().scheduleBillboard(idMovie, "SI");
         return "mainPage.jsp";
@@ -128,7 +133,7 @@ public class Controller extends HttpServlet {
 
     private String getOff(HttpServletRequest request) throws Exception {
         String idMovie = (String) request.getParameter("newBillboard");
-        System.out.println("ALGOXD: "+idMovie);
+        System.out.println("ALGOXD: " + idMovie);
         Cinema.getInstance().scheduleBillboard(idMovie, "NO");
         return "mainPage.jsp";
     }
@@ -160,49 +165,54 @@ public class Controller extends HttpServlet {
     }
 
     private String generarReporte(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        response.setContentType("application/pdf");
         OutputStream out = response.getOutputStream();
-        try{
-        String numTick = request.getParameter("comboTickets");
-            System.out.println(numTick);
-        if(numTick.isEmpty()) {
-            throw new IOException("El campo no debe estar vacio.");
+        try {
+            String numTick = request.getParameter("comboTickets");
+            HashMap<String, ticketOffice> tickets
+                    = (HashMap<String, ticketOffice>) request.getSession(true).getAttribute("ticks");
+            ticketOffice t = tickets.get(numTick);
+            if (t == null || tickets == null) {
+                System.out.println("ALGO XDNT: " + numTick);
+
+            } else {
+                try {
+                    Date actualDate = new Date();
+                    Document documento = new Document();
+                    PdfWriter.getInstance(documento, out);
+                    documento.open();
+                    Paragraph par1 = new Paragraph();
+                    Font fontTitulo = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD, BaseColor.BLACK);
+                    par1.add(new Phrase("REPORTE DE TICKET", fontTitulo));
+                    par1.add(new Phrase(Chunk.NEWLINE));
+                    par1.setAlignment(Element.ALIGN_CENTER);
+                    par1.add(new Phrase(Chunk.NEWLINE));
+                    par1.add(new Phrase("FECHA DE EMISION: "+actualDate.toString()));
+                    par1.add(new Phrase(Chunk.NEWLINE));
+                    par1.add(new Phrase("ID: " + t.getId()));
+                    par1.add(new Phrase(Chunk.NEWLINE));
+                    par1.add(new Phrase("ID Cliente: " + t.getIdClient()));
+                    par1.add(new Phrase(Chunk.NEWLINE));
+                    par1.add(new Phrase("Ocupado: " + t.getOccupied()));
+                    par1.add(new Phrase(Chunk.NEWLINE));
+                    par1.add(new Phrase("Pelicula: " + t.getMovie()));
+                    par1.add(new Phrase(Chunk.NEWLINE));
+                    par1.add(new Phrase("Total: " + t.getTotal()));
+                    documento.add(par1);
+                    documento.close();
+                    response.setContentType("application/pdf");
+                    response.addHeader("Content-disposition", "inline");
+                } catch (DocumentException exc) {
+                    throw new IOException(exc.getMessage());
+                } finally {
+                    out.close();
+                }
+                System.out.println(t.getId());
+            }
+            response.setHeader("content-disposition", "attachment;filename=" + request.getParameter("comboTickets"));
+        } catch (Exception e) {
+            throw e;
         }
-        
-        ticketOffice t = Cinema.getInstance().ticketFind(numTick);
-        
-        if(t==null){
-            throw new Exception("No existe el ticket.");
-        }else{
-            
-            System.out.println(t.getId());
-        
-        
- 
-        Document documento = new Document();
-        PdfWriter.getInstance(documento, out);
-        documento.open();
-        Paragraph par1 = new Paragraph();
-        Font fontTitulo = new Font(Font.FontFamily.HELVETICA,16,Font.BOLD,BaseColor.BLACK);
-        par1.add(new Phrase("REPORTE DE TICKET",fontTitulo));
-        par1.setAlignment(Element.ALIGN_CENTER);
-        par1.add(new Phrase(Chunk.NEWLINE));
-        par1.add(new Phrase(Chunk.NEWLINE));
-        par1.add(new Phrase("ID: "+t.getId()));
-        par1.add(new Phrase("ID Cliente: "+t.getIdClient()));
-        par1.add(new Phrase("Ocupado: "+t.getOccupied()));
-        par1.add(new Phrase("Pelicula: "+t.getMovie()));
-        par1.add(new Phrase("Total: "+t.getTotal()));
-        documento.add(par1);
-        documento.close();
-        
-        }
-        
-       
-        }catch(Exception e){
-           throw e;
-        }  
-       return "printTickets.jsp";
+        return "printTickets.jsp";
     }
 
     @Override

@@ -29,12 +29,11 @@
                 <H1 class = "text-center text-white">Registro de proyecciones</H1>
                 <div>&nbsp;</div>
                 <% if (movs != null) { %>
-                <select name="newBillboard" class ="form-control text-center">
+                <select name="newBillboard" id = "newBillboard" class ="form-control text-center">
                     <option value="" selected>Seleccione una pelicula</option>
-
                     <%for (Map.Entry<String, Movie> entry : movs.entrySet()) { %>
                     <% Movie s = movs.get(entry.getKey());%>
-                    <option value = <%= s.getId()%> > <%= s.getName()%> </option>
+                    <option value = "<%= s.getId()%>" > <%= s.getId()+"/"+s.getName()+"/"+s.getDirector()+"/"+s.getPublicationYear()%> </option>
                     <% }%>
                     
                 </select>

@@ -25,30 +25,46 @@
             <img class="w-100 mx-auto" src="images/csm.png" height="250" width = "800">
         </div>
 
-        <form class = "container center_div w-75 p-3" name = "regForm" action="/ExamenPrograIV/print" method="POST">
-            <div class = "form-group">
-                <H1 class = "text-center text-white">Registro de Ticketes</H1>
-                <% if (ticks != null) { %>
-                <select name="comboTickets" class ="form-control text-center">
-                    <option value="" selected>Seleccione una Compra</option>
-
+        <div class = "form-group">
+            <H1 class = "text-center text-white">Imprimir Tiquetes</H1>
+            <div>&nbsp;</div>
+            <div class="text-white text-center">Seleccione alguno de los tiquetes para generar el archivo ".PDF"</div>
+            <% if (ticks != null) { %>
+            <div class="card-body bg-dark text-white">
+                <table class = "table table-condensed">
+                    <tr>
+                        <th class="text-center text-white">ID tiquete</th>
+                        <th class="text-center text-white">ID Cliente</th>
+                        <th class="text-center text-white">Pelicula</th>
+                        <th class="text-center text-white">Sala</th>
+                        <th class="text-center text-white">Total</th>
+                        <th class="text-center text-white">Descargar</th>
+                    </tr>
                     <%for (Map.Entry<String, ticketOffice> entry : ticks.entrySet()) { %>
-                    <% ticketOffice s = ticks.get(entry.getKey());%>
-                    <option value = <%= s.getId()%> > <%= s.getId()%> </option>
-                    <% }%>
-                </select>
-                <% } else {%>
-                <div class="text-white text-center">No hay compras disponibles para proyectar</div>
-                <% }%>
-                <div>
-                </div>
+                    <%  ticketOffice s = ticks.get(entry.getKey());%>
+                    <tr>
+                        <td class="text-center text-white"><%= s.getId()%></td>
+                        <td class="text-center text-white"><%= s.getIdClient()%></td>
+                        <td class="text-center text-white"><%= s.getMovie()%></td>
+                        <td class="text-center text-white">N/A</td>
+                        <td class="text-center text-white"><%= s.getTotalS()%></td>
+                        <td class="text-center text-white">
+                            <a class="navbar-brand" href="/ExamenPrograIV/pdf?comboTickets=<%= s.getId()%>"
+                                download="<%=s.getId()%>_tiquete.pdf">
+                                <button class ="btn btn-outline-light form-control">Generar PDF</button>
+                            </a>
+                        </td>
+                    </tr>
+                     <% }%>
+                </table>
             </div>
-        </form>
-                <form class = "container center_div w-75 p-3" action="/ExamenPrograIV/pdf" method="POST">
-                    <input type="submit" value="Visualizar PDF" name="btnPDF" />
-                </form>
-        
-                
+
+            <% }else {%>
+            <div class="text-white text-center">No hay compras disponibles para proyectar</div>
+            <% }%>
+            <div>
+            </div>
+        </div>
         <div class="d-flex justify-content-center">
             <object type="text/html" data="Footer.html"></object>
         </div>

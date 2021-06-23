@@ -27,7 +27,7 @@
 
 
                 <div class="card p-3 bg-dark col w-15">
-                    <a href="#" id="imagen1" class="p-3 bg-dark text-center" >
+                    <a href="/ExamenPrograIV/booking.html" id="imagen1" class="p-3 bg-dark text-center" >
                         <img src='<%=sub.getImgLink()%>' height="150" width = "150">
                     </a>
                     <div class="text-center" ><label class="card-title text-center"><%= "ID: "+ sub.getId()+" Nombre: "+sub.getName()%></label></div>
@@ -36,7 +36,7 @@
                     <div>&nbsp;</div>
                     <div  class="text-center"><label><%= "Director: "+ sub.getDirector()%></label></div>
                     <div  class="text-center"><label><%= "En taquilla: "+ sub.getInBillboard()%></label></div>
-                    <a class ="btn btn-outline-light container center_div w-75 p-1" href="#">
+                    <a class ="btn btn-outline-light container center_div w-75 p-1" href="/ExamenPrograIV/booking.html">
                         Comprar tiquete(s)
                     </a>
                 </div>
