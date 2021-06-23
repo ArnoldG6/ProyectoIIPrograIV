@@ -227,9 +227,8 @@ public class Controller extends HttpServlet {
 
     private String seePurchases(HttpServletRequest request) throws Exception {
         try {
-            HttpSession session = request.getSession(true);
-            User u = (User) session.getAttribute("user");
-            session.setAttribute("tickets", Cinema.getInstance().getPurchases1(u.getId()));
+            User user = (User) request.getSession(true).getAttribute("user");
+            request.getSession(true).setAttribute("ticks", Cinema.getInstance().getClientTickets(user));
         } catch (Exception e) {
             HttpSession session = request.getSession(true);
             session.setAttribute("exc", e.getMessage());

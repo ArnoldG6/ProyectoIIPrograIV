@@ -77,7 +77,18 @@ public class Cinema {
     public HashMap<String, ticketOffice> getAllTickets() throws Exception {
         return TicketOfficeDAO.getInstance().listAll();
     }
-
+    public HashMap<String, ticketOffice> getClientTickets(User user) throws Exception {
+        if(user == null) throw new IOException("Sesion Expirada");
+        HashMap<String, ticketOffice> aux_tickets = Cinema.getInstance().getAllTickets();
+        HashMap<String, ticketOffice> result = new HashMap<String,ticketOffice>();
+        ticketOffice value;
+        for (HashMap.Entry<String, ticketOffice> entry : aux_tickets.entrySet()) {
+                value = aux_tickets.get(entry.getKey());
+                if (value.getIdClient().equals(user.getId()) || value.getIdClient().equals(user.getName()))
+                        result.put(value.getId(), value);
+        }
+        return result;
+    }
     public void insertRoom(Room c) throws Exception {
         updateModel();
         Room room = Cinema.getInstance().getRooms().get(c.getId());

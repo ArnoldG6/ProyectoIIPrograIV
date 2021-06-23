@@ -11,7 +11,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Change Projections</title>
+        <title>Imprimir Tiquetes</title>
+        <link rel="icon" href="/ExamenPrograIV/images/landing-page.png" >
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css">         
