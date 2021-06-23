@@ -28,7 +28,7 @@ import model.ticketOffice;
  * @author Vic
  */
 @WebServlet(name = "Controller", urlPatterns = {"/registerRoom", "/loadMovies", "/schedule",
-    "/PutIn", "/GetOff", "/searchMovies", "/print", "/seePurchases"})
+    "/PutIn", "/GetOff", "/searchMovies", "/print", "/seePurchases","/pdf"})
 public class Controller extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -121,14 +121,15 @@ public class Controller extends HttpServlet {
 
     private String putIn(HttpServletRequest request) throws Exception {
         
-        //String idMovie = request.getParameter("newBillboard");
-        //Cinema.getInstance().scheduleBillboard(idMovie, "SI");
+        String idMovie = request.getParameter("newBillboard");
+        Cinema.getInstance().scheduleBillboard(idMovie, "SI");
         return "mainPage.jsp";
     }
 
     private String getOff(HttpServletRequest request) throws Exception {
-        //String idMovie = request.getParameter("newBillboard");
-        //Cinema.getInstance().scheduleBillboard(idMovie, "NO");
+        String idMovie = (String) request.getParameter("newBillboard");
+        System.out.println("ALGOXD: "+idMovie);
+        Cinema.getInstance().scheduleBillboard(idMovie, "NO");
         return "mainPage.jsp";
     }
 
