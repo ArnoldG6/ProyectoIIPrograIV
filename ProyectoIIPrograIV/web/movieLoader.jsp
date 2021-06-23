@@ -36,8 +36,8 @@
                     <div>&nbsp;</div>
                     <div  class="text-center"><label><%= "Director: "+ sub.getDirector()%></label></div>
                     <div  class="text-center"><label><%= "En taquilla: "+ sub.getInBillboard()%></label></div>
-                    <a class ="btn btn-outline-light container center_div w-75 p-1" href="/ExamenPrograIV/booking.html">
-                        Comprar tiquete(s)
+                    <a class ="btn btn-outline-light container center_div p-1" href="/ExamenPrograIV/booking.html">
+                        Ver
                     </a>
                 </div>
 
