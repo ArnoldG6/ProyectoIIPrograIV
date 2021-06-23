@@ -160,7 +160,8 @@ public class Controller extends HttpServlet {
     }
 
     private String generarReporte(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        HttpSession session = request.getSession(true);
+        response.setContentType("application/pdf");
+        OutputStream out = response.getOutputStream();
         try{
         String numTick = request.getParameter("comboTickets");
             System.out.println(numTick);
@@ -176,13 +177,11 @@ public class Controller extends HttpServlet {
             
             System.out.println(t.getId());
         
-        OutputStream out = response.getOutputStream();
+        
  
         Document documento = new Document();
         PdfWriter.getInstance(documento, out);
-        
         documento.open();
-        
         Paragraph par1 = new Paragraph();
         Font fontTitulo = new Font(Font.FontFamily.HELVETICA,16,Font.BOLD,BaseColor.BLACK);
         par1.add(new Phrase("REPORTE DE TICKET",fontTitulo));
@@ -199,7 +198,7 @@ public class Controller extends HttpServlet {
         
         }
         
-        request.getRequestDispatcher("printTickets.jsp").forward(request, response);
+       
         }catch(Exception e){
            throw e;
         }  
