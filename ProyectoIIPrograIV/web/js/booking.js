@@ -243,7 +243,7 @@ function errorMessage(status, place) {
 }
 
 function loadPurchase() {
-    let request = new Request(url + 'booking.html', {method: 'GET'});
+    let request = new Request(url + 'mainpage.jsp', {method: 'GET'});
     (async () => {
         const response = await fetch(request);
         content = await response.text();
