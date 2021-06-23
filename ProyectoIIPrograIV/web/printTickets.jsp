@@ -27,7 +27,7 @@
 
         <form class = "container center_div w-75 p-3" name = "regForm" action="/ExamenPrograIV/print" method="POST">
             <div class = "form-group">
-                <H1 class = "text-center text-white">Registro de proyecciones</H1>
+                <H1 class = "text-center text-white">Registro de Ticketes</H1>
                 <% if (ticks != null) { %>
                 <select name="comboTickets" class ="form-control text-center">
                     <option value="" selected>Seleccione una Compra</option>
