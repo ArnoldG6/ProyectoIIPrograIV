@@ -6,6 +6,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -182,6 +183,8 @@ public class Controller extends HttpServlet {
                     documento.open();
                     Paragraph par1 = new Paragraph();
                     Font fontTitulo = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD, BaseColor.BLACK);
+                    //Image img = Image.getInstance("img.png");     
+                    //img.setAlignment(Element.ALIGN_CENTER);
                     par1.add(new Phrase("REPORTE DE TICKET", fontTitulo));
                     par1.add(new Phrase(Chunk.NEWLINE));
                     par1.setAlignment(Element.ALIGN_CENTER);
@@ -197,6 +200,8 @@ public class Controller extends HttpServlet {
                     par1.add(new Phrase("Pelicula: " + t.getMovie()));
                     par1.add(new Phrase(Chunk.NEWLINE));
                     par1.add(new Phrase("Total: " + t.getTotal()));
+                    par1.add(new Phrase(Chunk.NEWLINE));
+                    //documento.add(img);
                     documento.add(par1);
                     documento.close();
                     response.setContentType("application/pdf");
