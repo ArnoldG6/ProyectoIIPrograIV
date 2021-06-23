@@ -24,6 +24,6 @@
             <object type="text/html" data="Footer.html"></object>
         </div>
     </body>
-    
+    <script src="js/registerMovie.js"></script>
     
 </html>
