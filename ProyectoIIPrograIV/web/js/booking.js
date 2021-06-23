@@ -1,6 +1,7 @@
 /* global doc */
 ////******************************* SELECTIONS
 // Git repo https://github.com/sitowebveloce/cinema-booking
+var url = "http://localhost:8080/ExamenPrograIV/";
 
 const rows = document.querySelectorAll(".rows");
 const costo = document.querySelector(".costo");
@@ -11,6 +12,7 @@ let postoS = document.querySelector(".postoS");
 const acquista = document.querySelector(".btnAcquista");
 // Select film selector
 let film = document.getElementById("film");
+let tarjet = document.getElementById("tarjeta");
 // Select sedie
 const sedie = document.querySelectorAll(".sedia:not(.occupata)");
 // Global Variables
@@ -167,43 +169,41 @@ acquista.addEventListener("click", () => {
         // Save
         localStorage.setItem("occupate", JSON.stringify(localStorageSeatsOccupied));
     });
+    subStringAsientos();
 });
 
 //let usuarioJson = sessionStorage.getItem('user');
-usuarioJson = sessionStorage.getItem('user');
-var usuariofinal="";
-if(usuarioJson!==null){
-    usuario= JSON.parse(JSON.stringify(usuarioJson))
-    ;
-    usuariofinal=usuario.id;
-}
-else{
-    usuariofinal="";
-}
 
 function subStringAsientos() {
-
+    usuarioJson = sessionStorage.getItem('user');
+    var usuariofinal="";
+    if(usuarioJson!==null){
+        usuario= JSON.parse(JSON.stringify(usuarioJson));
+        usuariofinal=usuario.id;
+    }
+    
     var cadena = postoS.innerHTML,
             separador = " -",
             asientos = cadena.split(separador);
     console.log(asientos);
     for (var i = 0; i < asientos.length-1; i++){
-        //purchase(asientos[i]);
+        purchase(asientos[i], usuariofinal);
         console.log(asientos[i]);
     }
-
-
 }
-/*
-var url = "http://localhost:8080/ExamenPrograIV/";
 
-function purchase() {
+function purchase(asientos, usuariofinal) {
+    if(asientos===null)
+        return;
+    if(usuariofinal===null)
+        return;
     if (!valPurchase())
         return;
     if (!valPurchase()) return;
         ticketOffice = {
-            id: "",
-            idClient: "",
+            id: asientos,
+            idClient: usuariofinal,
+            movie_name: "",
             occupied: 1,
             total: $("#costototal").val()
         };
@@ -220,6 +220,7 @@ function valPurchase() {
     $("#purchaseForm2").addClass("was-validated");
     return $("#purchaseForm2").get(0).checkValidity();
 }
+
 function errorMessage(status, place) {
     switch (status) {
         case 404:
@@ -252,4 +253,4 @@ function loadPurchase() {
 
 }
 
-$(loadPurchase);  */
+$(loadPurchase);
